@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/orange"
+        android:fitsSystemWindows="false">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:collapsedTitleTextColor="@color/white"
+            app:contentScrim="@color/orange"
+            app:expandedTitleTextColor="@color/white"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:title="">
+
+            <ImageView
+                android:id="@+id/imageDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="350dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gay_bao_ga_han_quoc" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_collapseMode="pin" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/subConstrain"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/login_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:layout_marginTop="@dimen/mediumSpace"
+                android:drawableStart="@drawable/ic_star"
+                android:drawablePadding="@dimen/smallSpace"
+                android:gravity="center"
+                android:padding="@dimen/smallSpace"
+                android:text="4.5"
+                android:textSize="@dimen/largeText"
+                app:layout_constraintEnd_toStartOf="@+id/kcal"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text2" />
+
+            <TextView
+                android:id="@+id/min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_time"
+                android:drawablePadding="@dimen/smallSpace"
+                android:gravity="center"
+                android:padding="@dimen/smallSpace"
+                android:text="25 min"
+                android:textSize="@dimen/largeText"
+                app:layout_constraintBottom_toBottomOf="@+id/kcal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/kcal"
+                app:layout_constraintTop_toTopOf="@+id/kcal" />
+
+            <TextView
+                android:id="@+id/kcal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_kcal"
+                android:drawablePadding="@dimen/smallSpace"
+                android:gravity="center"
+                android:padding="@dimen/smallSpace"
+                android:text="100 Kcal"
+                android:textSize="@dimen/largeText"
+                app:layout_constraintBottom_toBottomOf="@+id/start"
+                app:layout_constraintEnd_toStartOf="@+id/min"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/start"
+                app:layout_constraintTop_toTopOf="@+id/start" />
+
+            <TextView
+                android:id="@+id/foodPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:text="$ 100"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/largeText"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/subConstrain"
+                app:layout_constraintTop_toTopOf="@id/subConstrain" />
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mediumSpace"
+                android:text="Availability: 24 in stock"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/foodPrice"
+                app:layout_constraintTop_toBottomOf="@id/foodPrice" />
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/imageView7"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/smallSpace"-->
+            <!--                app:layout_constraintStart_toStartOf="@+id/foodPrice"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/foodPrice"-->
+            <!--                app:srcCompat="@drawable/ic_star" />-->
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/imageView8"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/smallSpace"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/imageView7"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/imageView7"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/imageView7"-->
+            <!--                app:srcCompat="@drawable/ic_star" />-->
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/imageView9"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/smallSpace"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/imageView7"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/imageView8"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/imageView7"-->
+            <!--                app:srcCompat="@drawable/ic_star" />-->
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/imageView10"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/smallSpace"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/imageView7"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/imageView9"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/imageView7"-->
+            <!--                app:srcCompat="@drawable/ic_star" />-->
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/imageView11"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/smallSpace"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/imageView7"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/imageView10"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/imageView7"-->
+            <!--                app:srcCompat="@drawable/ic_star" />-->
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:layout_marginEnd="@dimen/extraSpace"
+                android:background="@color/white_dark"
+                app:layout_constraintEnd_toEndOf="@id/subConstrain"
+                app:layout_constraintStart_toStartOf="@id/subConstrain"
+                app:layout_constraintTop_toBottomOf="@id/start" />
+
+            <TextView
+                android:id="@+id/thanhPhanText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:text="@string/thanh_phan_text"
+                android:textSize="@dimen/largeText"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/view"
+                app:layout_constraintTop_toBottomOf="@id/view" />
+
+            <TextView
+                android:id="@+id/thanhPhanContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:layout_marginTop="@dimen/mediumSpace"
+                android:layout_marginEnd="@dimen/extraSpace"
+                android:textAlignment="textStart"
+                android:textSize="@dimen/mediumText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/thanhPhanText"
+                app:layout_constraintTop_toBottomOf="@id/thanhPhanText" />
+
+            <TextView
+                android:id="@+id/ingredientText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:text="@string/ingredients_text"
+                android:textSize="@dimen/largeText"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/view"
+                app:layout_constraintTop_toBottomOf="@id/thanhPhanContent" />
+
+            <TextView
+                android:id="@+id/ingredientContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:layout_marginTop="@dimen/mediumSpace"
+                android:layout_marginEnd="@dimen/extraSpace"
+                android:textAlignment="textStart"
+                android:textSize="@dimen/mediumText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/thanhPhanText"
+                app:layout_constraintTop_toBottomOf="@id/ingredientText" />
+
+            <TextView
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:text="@string/quantity_text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/largeText"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/thanhPhanText"
+                app:layout_constraintTop_toBottomOf="@id/ingredientContent" />
+
+            <TextView
+                android:id="@+id/minusText"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:background="@drawable/circle_background_minus"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/quantity"
+                app:layout_constraintStart_toEndOf="@id/quantity"
+                app:layout_constraintTop_toTopOf="@id/quantity" />
+
+            <TextView
+                android:id="@+id/countText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mediumSpace"
+                android:padding="@dimen/extraSpace"
+                android:text="1"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/quantity"
+                app:layout_constraintStart_toEndOf="@id/minusText"
+                app:layout_constraintTop_toTopOf="@id/quantity" />
+
+            <TextView
+                android:id="@+id/plusText"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="@dimen/mediumSpace"
+                android:background="@drawable/circle_background_plus"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/quantity"
+                app:layout_constraintStart_toEndOf="@id/countText"
+                app:layout_constraintTop_toTopOf="@id/quantity" />
+
+            <TextView
+                android:id="@+id/tv10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:text="Total price: "
+                android:textColor="@color/black"
+                android:textSize="@dimen/largeText"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/quantity"
+                app:layout_constraintTop_toBottomOf="@id/quantity" />
+
+            <TextView
+                android:id="@+id/totalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:text="$2030"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/largeText"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/tv10"
+                app:layout_constraintTop_toTopOf="@id/tv10" />
+
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:background="@drawable/background_button_add_to_cart"
+                android:text="Add to cart"
+                android:textColor="@color/black"
+                app:backgroundTint="@null"
+                app:layout_constraintEnd_toStartOf="@+id/placeOrderButton"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv10" />
+
+            <Button
+                android:id="@+id/placeOrderButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/place_order_background_button"
+                android:text="Place Order"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/addButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/addButton"
+                app:layout_constraintTop_toTopOf="@+id/addButton" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+

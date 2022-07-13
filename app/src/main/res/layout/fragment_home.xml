@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.HomeFragment">
+
+
+    <TextView
+        android:id="@+id/locationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extraSpace"
+        android:drawableStart="@drawable/ic_location"
+        android:drawablePadding="@dimen/extraSpace"
+        android:text="HaNoi, VietNam"
+        android:textColor="@color/black"
+        android:textSize="@dimen/largeText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="@dimen/extraSpace"
+        android:background="@drawable/background_icon"
+        android:padding="@dimen/extraSpace"
+        android:src="@drawable/ic_dehaze"
+        app:layout_constraintBottom_toBottomOf="@id/locationText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/locationText"
+        tools:layout_editor_absoluteX="10dp" />
+
+    <TextView
+        android:id="@+id/helloTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/extraSpace"
+        android:layout_marginTop="@dimen/extraSpace"
+        android:text="Hi Thanh"
+        android:textColor="@color/orange"
+        android:textSize="@dimen/largeText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationText" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extraSpace"
+        android:text="Find your food"
+        android:textColor="@color/black"
+        android:textSize="@dimen/extraSpace"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/helloTextView"
+        app:layout_constraintTop_toBottomOf="@+id/helloTextView" />
+
+    <EditText
+        android:id="@+id/searchEdittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/extraSpace"
+        android:layout_marginTop="@dimen/extraSpace"
+        android:layout_marginEnd="@dimen/extraSpace"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="@dimen/extraSpace"
+        android:hint="Search Food"
+        android:inputType="textPersonName"
+        android:padding="@dimen/extraSpace"
+        android:textSize="@dimen/extraSpace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extraSpace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchEdittext" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerFood"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/extraSpace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerCategory" />
+</androidx.constraintlayout.widget.ConstraintLayout>

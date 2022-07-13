@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/extraSpace"
+    android:layout_marginTop="@dimen/extraSpace"
+    android:layout_marginEnd="@dimen/extraSpace"
+    android:layout_marginBottom="@dimen/extraSpace"
+    android:background="@color/white_dark"
+    app:cardCornerRadius="@dimen/mediumRadius">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/itemFoodImage"
+            android:layout_width="0dp"
+            android:layout_height="128dp"
+            android:padding="@dimen/mediumSpace"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gay_bao_ga_han_quoc" />
+
+        <TextView
+            android:id="@+id/itemFoodName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mediumSpace"
+            android:text="Teriyaki"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/largeText"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/itemFoodImage"
+            app:layout_constraintStart_toStartOf="@id/itemFoodImage"
+            app:layout_constraintTop_toBottomOf="@id/itemFoodImage" />
+
+        <TextView
+            android:id="@+id/timeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mediumSpace"
+            android:layout_marginBottom="@dimen/mediumSpace"
+            android:drawableStart="@drawable/ic_access_time"
+            android:drawablePadding="@dimen/mediumSpace"
+            android:gravity="center"
+            android:padding="@dimen/smallSpace"
+            android:text="20min"
+            android:textSize="@dimen/smallText"
+            app:layout_constraintBottom_toTopOf="@id/itemPriceText"
+            app:layout_constraintStart_toStartOf="@id/itemFoodName"
+            app:layout_constraintTop_toBottomOf="@id/itemFoodName" />
+
+        <TextView
+            android:id="@+id/startText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/extraSpace"
+            android:drawableStart="@drawable/ic_star"
+            android:drawablePadding="@dimen/smallSpace"
+            android:gravity="center"
+            android:padding="@dimen/smallSpace"
+            android:text="4.5"
+            android:textSize="@dimen/smallText"
+            app:layout_constraintEnd_toEndOf="@id/parent"
+            app:layout_constraintTop_toTopOf="@id/timeText" />
+
+        <TextView
+            android:id="@+id/itemPriceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/extraSpace"
+            android:layout_marginTop="@dimen/mediumSpace"
+            android:layout_marginBottom="@dimen/mediumSpace"
+            android:text="$120"
+            android:textColor="@color/black"
+            android:textSize="@dimen/largeText"
+            app:layout_constraintBottom_toBottomOf="@id/parent"
+            app:layout_constraintStart_toStartOf="@id/itemFoodImage"
+            app:layout_constraintTop_toBottomOf="@id/timeText" />
+
+        <TextView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/add_background"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/itemPriceText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

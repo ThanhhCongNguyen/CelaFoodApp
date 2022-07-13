@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="extraSmallText">10sp</dimen>
+    <dimen name="smallText">12sp</dimen>
+    <dimen name="mediumText">14sp</dimen>
+    <dimen name="largeText">16sp</dimen>
+    <dimen name="extraLargeText">22sp</dimen>
+    <dimen name="extraExtraLargeText">32sp</dimen>
+
+    <dimen name="smallRadius">4dp</dimen>
+    <dimen name="mediumRadius">8dp</dimen>
+    <dimen name="extraRadius">8dp</dimen>
+
+    <dimen name="smallSpace">4dp</dimen>
+    <dimen name="mediumSpace">8dp</dimen>
+    <dimen name="extraSpace">16dp</dimen>
+    <dimen name="largeSpace">32dp</dimen>
+    <dimen name="extraLargeSpace">64dp</dimen>
+
+    <dimen name="mediumImage">40dp</dimen>
+</resources>
