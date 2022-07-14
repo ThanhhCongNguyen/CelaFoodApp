@@ -45,7 +45,6 @@ public class DetailActivity extends BaseActivity {
             if (food != null) {
                 Glide.with(getApplicationContext())
                         .load(food.getImage())
-                        .placeholder(R.drawable.loading)
                         .into(binding.imageDetail);
                 binding.foodPrice.setText(food.getPrice());
                 binding.collapsingToolbar.setTitle(food.getFoodName());
