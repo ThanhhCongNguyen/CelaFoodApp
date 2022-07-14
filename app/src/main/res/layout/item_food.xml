@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/extraSpace"
+    android:layout_marginStart="@dimen/mediumSpace"
     android:layout_marginTop="@dimen/extraSpace"
-    android:layout_marginEnd="@dimen/extraSpace"
+    android:layout_marginEnd="@dimen/mediumSpace"
     android:layout_marginBottom="@dimen/extraSpace"
     android:background="@color/white_dark"
     app:cardCornerRadius="@dimen/mediumRadius">

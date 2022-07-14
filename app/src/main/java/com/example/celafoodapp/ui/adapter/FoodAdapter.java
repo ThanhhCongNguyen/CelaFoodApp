@@ -38,9 +38,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             Food food = foods.get(position);
             holder.itemFoodName.setText(food.getFoodName());
             holder.itemFoodPrice.setText(food.getPrice());
+
             Glide.with(holder.itemView.getContext())
                     .load(food.getImage())
-                    .placeholder(R.drawable.loading)
                     .into(holder.itemFoodImage);
 
             holder.itemView.setOnClickListener(view -> {
@@ -51,15 +51,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     @Override
     public int getItemCount() {
-        if (foods != null) {
-            return foods.size();
-        }
-        return 0;
+        return foods != null ? foods.size() : 0;
     }
 
     public void setFoods(List<Food> foods) {
-        this.foods = foods;
-        notifyDataSetChanged();
+        if (foods != null) {
+            this.foods = foods;
+            notifyDataSetChanged();
+        }
     }
 
     class FoodViewHolder extends RecyclerView.ViewHolder {

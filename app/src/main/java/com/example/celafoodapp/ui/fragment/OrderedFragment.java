@@ -5,14 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-
 import com.example.celafoodapp.R;
+import com.example.celafoodapp.ui.base.BaseFragment;
 
-public class OrderedFragment extends Fragment {
-
-    public OrderedFragment() {
-    }
+public class OrderedFragment extends BaseFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

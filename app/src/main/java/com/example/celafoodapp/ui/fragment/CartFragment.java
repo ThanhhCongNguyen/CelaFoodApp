@@ -7,25 +7,24 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.celafoodapp.database.entity.CartContent;
 import com.example.celafoodapp.databinding.FragmentCartBinding;
 import com.example.celafoodapp.ui.activity.CheckoutActivity;
 import com.example.celafoodapp.ui.adapter.CartAdapter;
+import com.example.celafoodapp.ui.base.BaseFragment;
+import com.example.celafoodapp.util.Utility;
 import com.example.celafoodapp.viewmodel.FoodViewModel;
 
 import java.util.List;
 
-public class CartFragment extends Fragment {
-
+public class CartFragment extends BaseFragment {
     private FragmentCartBinding binding;
     private FoodViewModel foodViewModel;
     private CartAdapter cartAdapter;
     private int totalItems = 0;
     private int totalPrice = 0;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,7 +78,7 @@ public class CartFragment extends Fragment {
         totalPrice = 0;
 
         for (CartContent cartContent : cartContents) {
-            totalPrice += pricing(cartContent);
+            totalPrice += Utility.pricing(cartContent);
         }
 
         binding.subTotalTextView.setText("Total (" + totalItems + " items): ");
@@ -98,9 +97,9 @@ public class CartFragment extends Fragment {
         }
     }
 
-    private int pricing(CartContent cart) {
-        String temp = ((cart.getPrice().substring(0, cart.getPrice().length() - 1)));
-        String[] temp1 = temp.split(",");
-        return Integer.parseInt(temp1[0].concat(temp1[1])) * cart.getAmount();
-    }
+//    private int pricing(CartContent cart) {
+//        String temp = ((cart.getPrice().substring(0, cart.getPrice().length() - 1)));
+//        String[] temp1 = temp.split(",");
+//        return Integer.parseInt(temp1[0].concat(temp1[1])) * cart.getAmount();
+//    }
 }

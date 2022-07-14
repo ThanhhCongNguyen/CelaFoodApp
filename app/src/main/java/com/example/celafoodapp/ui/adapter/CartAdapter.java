@@ -1,6 +1,5 @@
 package com.example.celafoodapp.ui.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.celafoodapp.R;
 import com.example.celafoodapp.database.entity.CartContent;
+import com.example.celafoodapp.util.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,34 +43,32 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     .load(cart.getImage())
                     .placeholder(R.drawable.loading)
                     .into(holder.imageView);
+
             holder.foodName.setText(cart.getFoodName());
             holder.ingredient.setText("Ingredient: " + cart.getIngredient());
             holder.amount.setText(String.valueOf(cart.getAmount()));
-            holder.price.setText(String.valueOf(pricing(cart)));
+            holder.price.setText(String.valueOf(Utility.pricing(cart)));
 
             holder.minus.setOnClickListener(view -> {
                 callback.minus(cart.getId(), cart.getAmount());
-                Log.d("tag", "1");
             });
 
             holder.plus.setOnClickListener(view -> {
                 callback.plus(cart.getId(), cart.getAmount());
-               // Log.d("tag", "2");
             });
         }
     }
 
     public void setCarts(List<CartContent> carts) {
-        this.carts = carts;
-        notifyDataSetChanged();
+        if (carts != null) {
+            this.carts = carts;
+            notifyDataSetChanged();
+        }
     }
 
     @Override
     public int getItemCount() {
-        if (carts != null) {
-            return carts.size();
-        }
-        return 0;
+        return carts != null ? carts.size() : 0;
     }
 
     class CartViewHolder extends RecyclerView.ViewHolder {
@@ -95,9 +93,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         void plus(int id, int amount);
     }
 
-    private int pricing(CartContent cart) {
-        String temp = ((cart.getPrice().substring(0, cart.getPrice().length() - 1)));
-        String[] temp1 = temp.split(",");
-        return Integer.parseInt(temp1[0].concat(temp1[1])) * cart.getAmount();
-    }
+//    private int pricing(CartContent cart) {
+//        String temp = ((cart.getPrice().substring(0, cart.getPrice().length() - 1)));
+//        String[] temp1 = temp.split(",");
+//        return Integer.parseInt(temp1[0].concat(temp1[1])) * cart.getAmount();
+//    }
 }

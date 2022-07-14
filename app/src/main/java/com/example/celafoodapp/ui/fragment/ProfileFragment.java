@@ -5,15 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-
 import com.example.celafoodapp.R;
+import com.example.celafoodapp.ui.base.BaseFragment;
 
-public class ProfileFragment extends Fragment {
-
-    public ProfileFragment() {
-
-    }
+public class ProfileFragment extends BaseFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

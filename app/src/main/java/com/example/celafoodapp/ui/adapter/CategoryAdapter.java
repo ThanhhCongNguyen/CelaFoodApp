@@ -42,15 +42,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public int getItemCount() {
-        if (categories != null) {
-            return categories.size();
-        }
-        return 0;
+        return categories != null ? categories.size() : 0;
     }
 
     public void setTitles(List<String> titles) {
-        this.categories = titles;
-        notifyDataSetChanged();
+        if (titles != null) {
+            this.categories = titles;
+            notifyDataSetChanged();
+        }
     }
 
     class CategoryViewHolder extends RecyclerView.ViewHolder {

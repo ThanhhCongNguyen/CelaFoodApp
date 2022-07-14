@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -16,12 +15,11 @@ import com.example.celafoodapp.databinding.FragmentHomeBinding;
 import com.example.celafoodapp.ui.activity.DetailActivity;
 import com.example.celafoodapp.ui.adapter.CategoryAdapter;
 import com.example.celafoodapp.ui.adapter.FoodAdapter;
+import com.example.celafoodapp.ui.base.BaseFragment;
+import com.example.celafoodapp.util.AppData;
 import com.example.celafoodapp.viewmodel.FoodViewModel;
 
-public class HomeFragment extends Fragment {
-    private final int SPAN_COUNT = 2;
-    private final String CATEGORY_DEFAULT = "Cơm Eat Clean";
-
+public class HomeFragment extends BaseFragment {
     private FragmentHomeBinding binding;
     private FoodViewModel foodViewModel;
     private FoodAdapter foodAdapter;
@@ -56,7 +54,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         displayRecyclerFood();
-        observeRecyclerFood(CATEGORY_DEFAULT);
+        observeRecyclerFood(AppData.Config.CATEGORY_DEFAULT);
 
         displayRecyclerTitle();
         observeRecyclerTitle();
@@ -64,7 +62,7 @@ public class HomeFragment extends Fragment {
 
     private void displayRecyclerFood() {
         binding.recyclerFood.setAdapter(foodAdapter);
-        binding.recyclerFood.setLayoutManager(new GridLayoutManager(getContext(), SPAN_COUNT));
+        binding.recyclerFood.setLayoutManager(new GridLayoutManager(getContext(), AppData.Config.SPAN_COUNT));
     }
 
     private void observeRecyclerFood(String category) {

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 
 import com.bumptech.glide.Glide;
@@ -13,13 +12,13 @@ import com.example.celafoodapp.R;
 import com.example.celafoodapp.database.entity.Cart;
 import com.example.celafoodapp.database.entity.Food;
 import com.example.celafoodapp.databinding.ActivityDetailBinding;
+import com.example.celafoodapp.ui.base.BaseActivity;
+import com.example.celafoodapp.util.AppData;
 import com.example.celafoodapp.util.Utility;
 import com.example.celafoodapp.viewmodel.FoodViewModel;
 import com.google.android.material.appbar.AppBarLayout;
 
-public class DetailActivity extends AppCompatActivity {
-
-    private static final String keyFood = "key";
+public class DetailActivity extends BaseActivity {
 
     private ActivityDetailBinding binding;
     private FoodViewModel foodViewModel;
@@ -28,7 +27,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public static void starter(Context context, Food food) {
         Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra(keyFood, food);
+        intent.putExtra(AppData.Key.keyFood, food);
         context.startActivity(intent);
     }
 
@@ -42,7 +41,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            food = (Food) intent.getSerializableExtra(keyFood);
+            food = (Food) intent.getSerializableExtra(AppData.Key.keyFood);
             if (food != null) {
                 Glide.with(getApplicationContext())
                         .load(food.getImage())
@@ -84,6 +83,12 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
+
     private int pricing(int numberOfItems) {
         String temp = ((food.getPrice().substring(0, food.getPrice().length() - 1)));
         String[] temp1 = temp.split(",");
@@ -94,7 +99,6 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
 
         binding.collapsingToolbar.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
         binding.collapsingToolbar.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
@@ -108,11 +112,5 @@ public class DetailActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return super.onSupportNavigateUp();
     }
 }

@@ -4,19 +4,19 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.celafoodapp.R;
 import com.example.celafoodapp.databinding.ActivityMainBinding;
+import com.example.celafoodapp.ui.base.BaseActivity;
 import com.example.celafoodapp.ui.fragment.CartFragment;
 import com.example.celafoodapp.ui.fragment.HomeFragment;
 import com.example.celafoodapp.ui.fragment.OrderedFragment;
 import com.example.celafoodapp.ui.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
 
     @Override

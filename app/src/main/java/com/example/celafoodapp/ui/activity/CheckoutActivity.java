@@ -4,20 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.celafoodapp.databinding.ActivityCheckoutBinding;
+import com.example.celafoodapp.ui.base.BaseActivity;
+import com.example.celafoodapp.util.AppData;
 
-public class CheckoutActivity extends AppCompatActivity {
-
-    private static final String keyItem = "keyItem";
-    private static final String keyPrice = "keyPrice";
+public class CheckoutActivity extends BaseActivity {
     private ActivityCheckoutBinding binding;
 
     public static void starter(Context context, int totalItems, int totalPrice) {
         Intent intent = new Intent(context, CheckoutActivity.class);
-        intent.putExtra(keyItem, totalItems);
-        intent.putExtra(keyPrice, totalPrice);
+        intent.putExtra(AppData.Key.keyItem, totalItems);
+        intent.putExtra(AppData.Key.keyPrice, totalPrice);
         context.startActivity(intent);
     }
 
@@ -33,8 +30,8 @@ public class CheckoutActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            int totalItems = intent.getIntExtra(keyItem, 0);
-            int totalPrice = intent.getIntExtra(keyPrice, 0);
+            int totalItems = intent.getIntExtra(AppData.Key.keyItem, 0);
+            int totalPrice = intent.getIntExtra(AppData.Key.keyPrice, 0);
             binding.price.setText(String.valueOf(totalItems));
             binding.totalPrice.setText(totalPrice + "đ");
         }

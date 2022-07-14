@@ -12,9 +12,10 @@ import com.example.celafoodapp.database.entity.Category;
 import com.example.celafoodapp.database.entity.Food;
 import com.example.celafoodapp.database.dao.FoodDao;
 
-@Database(entities = {Category.class, Food.class, Cart.class}, version = 1, exportSchema = true)
+@Database(entities = {Category.class, Food.class, Cart.class}, version = 1)
 public abstract class MyDatabase extends RoomDatabase {
     public abstract FoodDao foodDao();
+
     public abstract CartDao cartDao();
 
     private static MyDatabase INSTANCE;
