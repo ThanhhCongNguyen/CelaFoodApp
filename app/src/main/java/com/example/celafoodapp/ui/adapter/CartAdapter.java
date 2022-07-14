@@ -41,7 +41,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
             Glide.with(holder.itemView)
                     .load(cart.getImage())
-                    .placeholder(R.drawable.loading)
                     .into(holder.imageView);
 
             holder.foodName.setText(cart.getFoodName());

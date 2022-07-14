@@ -58,24 +58,29 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/helloTextView"
         app:layout_constraintTop_toBottomOf="@+id/helloTextView" />
-
-    <EditText
-        android:id="@+id/searchEdittext"
+    
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/extraSpace"
         android:layout_marginTop="@dimen/extraSpace"
         android:layout_marginEnd="@dimen/extraSpace"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="@dimen/extraSpace"
-        android:hint="Search Food"
-        android:inputType="textPersonName"
-        android:padding="@dimen/extraSpace"
-        android:textSize="@dimen/extraSpace"
+        android:hint="@string/search_text"
+        app:boxBackgroundColor="@color/pink"
+        app:boxStrokeColor="@color/orange"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:startIconDrawable="@drawable/ic_search">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchEdittext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCategory"
@@ -84,7 +89,7 @@
         android:layout_marginTop="@dimen/extraSpace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchEdittext" />
+        app:layout_constraintTop_toBottomOf="@+id/searchLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerFood"
