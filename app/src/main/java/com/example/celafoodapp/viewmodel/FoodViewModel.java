@@ -5,18 +5,28 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.celafoodapp.database.entity.Cart;
-import com.example.celafoodapp.database.entity.CartContent;
-import com.example.celafoodapp.database.entity.Food;
+import com.example.celafoodapp.local.entity.Cart;
+import com.example.celafoodapp.local.entity.CartContent;
+import com.example.celafoodapp.local.entity.Food;
+import com.example.celafoodapp.local.entity.Order;
+import com.example.celafoodapp.local.entity.OrderContent;
 import com.example.celafoodapp.repository.FoodRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FoodViewModel extends ViewModel {
     private FoodRepository foodRepository;
+    private int totalItems = 1;
+    private int totalPrice = 0;
+    private List<CartContent> cartContents;
+    private List<Order> orderContents;
 
     public FoodViewModel(Context context) {
         foodRepository = new FoodRepository(context);
+        cartContents = new ArrayList<>();
+        orderContents = new ArrayList<>();
+
     }
 
     public LiveData<List<Food>> getFood(String categoryTitle) {
@@ -31,6 +41,10 @@ public class FoodViewModel extends ViewModel {
         return foodRepository.getCart();
     }
 
+    public LiveData<List<OrderContent>> getAllOrder() {
+        return foodRepository.getAllOrder();
+    }
+
     public void insertCart(Cart cart) {
         foodRepository.insertCart(cart);
     }
@@ -41,5 +55,61 @@ public class FoodViewModel extends ViewModel {
 
     public void updateCart(int id, int amount) {
         foodRepository.updateCart(id, amount);
+    }
+
+    public void insertOrder(Order order) {
+        foodRepository.insertOrder(order);
+    }
+
+    public void insertMultipleRows(List<Order> orders) {
+        foodRepository.insertMultipleRows(orders);
+    }
+
+    public int getTotalItems() {
+        return totalItems;
+    }
+
+    public void setTotalItems(int totalItems) {
+        this.totalItems = totalItems;
+    }
+
+    public void plusItems() {
+        this.totalItems++;
+    }
+
+    public void minusItems() {
+        if (this.totalItems > 1) {
+            this.totalItems--;
+        } else {
+            return;
+        }
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public List<CartContent> getCartContents() {
+        return cartContents;
+    }
+
+    public void setCartContents(List<CartContent> cartContents) {
+        this.cartContents = cartContents;
+    }
+
+    public List<Order> getOrderContents() {
+        return orderContents;
+    }
+
+    public void setOrderContents(List<Order> orderContents) {
+        this.orderContents = orderContents;
+    }
+
+    public void addOrder(Order order) {
+        orderContents.add(order);
     }
 }

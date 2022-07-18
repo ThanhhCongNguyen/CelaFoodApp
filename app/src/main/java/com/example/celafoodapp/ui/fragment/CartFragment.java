@@ -1,5 +1,6 @@
 package com.example.celafoodapp.ui.fragment;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +8,15 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.celafoodapp.database.entity.CartContent;
+import com.example.celafoodapp.local.entity.CartContent;
+import com.example.celafoodapp.local.entity.Food;
+import com.example.celafoodapp.local.entity.Order;
 import com.example.celafoodapp.databinding.FragmentCartBinding;
 import com.example.celafoodapp.ui.activity.CheckoutActivity;
+import com.example.celafoodapp.ui.activity.DetailActivity;
 import com.example.celafoodapp.ui.adapter.CartAdapter;
 import com.example.celafoodapp.ui.base.BaseFragment;
 import com.example.celafoodapp.util.Utility;
@@ -23,8 +28,8 @@ public class CartFragment extends BaseFragment {
     private FragmentCartBinding binding;
     private FoodViewModel foodViewModel;
     private CartAdapter cartAdapter;
-    private int totalItems = 0;
-    private int totalPrice = 0;
+//    private List<CartContent> cartContents;
+//    private List<Order> orderContents;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,19 @@ public class CartFragment extends BaseFragment {
             public void plus(int id, int amount) {
                 plusAction(id, amount);
             }
+
+            @Override
+            public void checkout(int amount, int price) {
+                CheckoutActivity.starter(getContext(), amount, price);
+            }
+
+            @Override
+            public void itemOnClick(Food food) {
+                DetailActivity.starter(getContext(), food);
+            }
         });
+//        cartContents = new ArrayList<>();
+//        orderContents = new ArrayList<>();
     }
 
     @Override
@@ -57,43 +74,59 @@ public class CartFragment extends BaseFragment {
         observeCartRecyclerView();
 
         binding.placeOrderedButton.setOnClickListener(view1 -> {
-            CheckoutActivity.starter(getContext(), totalItems, totalPrice);
+            for (CartContent cartContent : foodViewModel.getCartContents()) {
+                int userId = cartContent.getUserId();
+                int foodId = cartContent.getFoodId();
+                int amount = cartContent.getAmount();
+                Order order = new Order(userId, foodId, amount);
+                foodViewModel.addOrder(order);
+//                foodViewModel.setOrderContents();
+            }
+            AsyncTask.execute(() -> foodViewModel.insertMultipleRows(foodViewModel.getOrderContents()));
+            // CheckoutActivity.starter(getContext(), foodViewModel.getTotalItems(), foodViewModel.getTotalPrice());
         });
     }
 
     private void displayCartRecyclerView() {
         binding.recyclerCart.setAdapter(cartAdapter);
         binding.recyclerCart.setLayoutManager(new LinearLayoutManager(getContext()));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new CartAdapter.SwipeToDeleteCallback(cartAdapter));
+        itemTouchHelper.attachToRecyclerView(binding.recyclerCart);
     }
 
     private void observeCartRecyclerView() {
         foodViewModel.getAllCart().observe(getViewLifecycleOwner(), cartContents -> {
             cartAdapter.setCarts(cartContents);
             setTotal(cartContents);
+            foodViewModel.setCartContents(cartContents);
         });
     }
 
     private void setTotal(List<CartContent> cartContents) {
-        totalItems = cartContents.size();
-        totalPrice = 0;
+        int priceTemp = 0;
+        foodViewModel.setTotalItems(cartContents.size());
+        foodViewModel.setTotalPrice(0);
 
         for (CartContent cartContent : cartContents) {
-            totalPrice += Utility.pricing(cartContent);
+            priceTemp += Utility.pricing(cartContent);
         }
-
-        binding.subTotalTextView.setText("Total (" + totalItems + " items): ");
-        binding.totalPrice.setText(totalPrice + "đ");
+        foodViewModel.setTotalPrice(priceTemp);
+        binding.subTotalTextView.setText("Total (" + foodViewModel.getTotalItems() + " items): ");
+        binding.totalPrice.setText(foodViewModel.getTotalPrice() + "đ");
     }
 
     private void plusAction(int id, int amount) {
         amount++;
-        foodViewModel.updateCart(id, amount);
+        int finalAmount = amount;
+        AsyncTask.execute(() -> foodViewModel.updateCart(id, finalAmount));
+        // foodViewModel.updateCart(id, amount);
     }
 
     private void minusAction(int id, int amount) {
         if (amount > 1) {
             amount--;
-            foodViewModel.updateCart(id, amount);
+            int finalAmount = amount;
+            AsyncTask.execute(() -> foodViewModel.updateCart(id, finalAmount));
         }
     }
 

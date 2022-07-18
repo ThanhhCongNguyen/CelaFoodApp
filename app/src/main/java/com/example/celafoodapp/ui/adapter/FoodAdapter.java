@@ -1,17 +1,14 @@
 package com.example.celafoodapp.ui.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.celafoodapp.R;
-import com.example.celafoodapp.database.entity.Food;
+import com.example.celafoodapp.local.entity.Food;
+import com.example.celafoodapp.databinding.ItemFoodBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,20 +25,20 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     @NonNull
     @Override
     public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food, parent, false);
-        return new FoodViewHolder(view);
+        ItemFoodBinding binding = ItemFoodBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new FoodViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
-        if (foods != null) {
-            Food food = foods.get(position);
-            holder.itemFoodName.setText(food.getFoodName());
-            holder.itemFoodPrice.setText(food.getPrice());
+        Food food = foods.get(position);
+        if (food != null) {
+            holder.binding.itemFoodName.setText(food.getFoodName());
+            holder.binding.itemPriceText.setText(food.getPrice());
 
             Glide.with(holder.itemView.getContext())
                     .load(food.getImage())
-                    .into(holder.itemFoodImage);
+                    .into(holder.binding.itemFoodImage);
 
             holder.itemView.setOnClickListener(view -> {
                 callBack.onItemClick(food);
@@ -61,15 +58,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         }
     }
 
-    class FoodViewHolder extends RecyclerView.ViewHolder {
-        private ImageView itemFoodImage;
-        private TextView itemFoodName, itemFoodPrice;
+    public class FoodViewHolder extends RecyclerView.ViewHolder {
+        private ItemFoodBinding binding;
 
-        public FoodViewHolder(@NonNull View itemView) {
-            super(itemView);
-            itemFoodImage = itemView.findViewById(R.id.itemFoodImage);
-            itemFoodName = itemView.findViewById(R.id.itemFoodName);
-            itemFoodPrice = itemView.findViewById(R.id.itemPriceText);
+        public FoodViewHolder(@NonNull ItemFoodBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 

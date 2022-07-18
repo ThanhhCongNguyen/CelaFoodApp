@@ -18,43 +18,45 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
+    private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        initMenu();
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
         loadFragment(new HomeFragment());
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment;
-            switch (item.getItemId()) {
-                case R.id.home:
-                    fragment = new HomeFragment();
-                    loadFragment(fragment);
-                    return true;
-                case R.id.cart:
-                    fragment = new CartFragment();
-                    loadFragment(fragment);
-                    return true;
-                case R.id.order:
-                    fragment = new OrderedFragment();
-                    loadFragment(fragment);
-                    return true;
-                case R.id.profile:
-                    fragment = new ProfileFragment();
-                    loadFragment(fragment);
-                    return true;
+    private void initMenu() {
+        onNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment;
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        fragment = new HomeFragment();
+                        loadFragment(fragment);
+                        return true;
+                    case R.id.cart:
+                        fragment = new CartFragment();
+                        loadFragment(fragment);
+                        return true;
+                    case R.id.order:
+                        fragment = new OrderedFragment();
+                        loadFragment(fragment);
+                        return true;
+                    case R.id.profile:
+                        fragment = new ProfileFragment();
+                        loadFragment(fragment);
+                        return true;
+                }
+                return false;
             }
-            return false;
-        }
-    };
+        };
+    }
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

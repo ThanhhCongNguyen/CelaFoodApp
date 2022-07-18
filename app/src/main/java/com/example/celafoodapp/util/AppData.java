@@ -2,9 +2,11 @@ package com.example.celafoodapp.util;
 
 public interface AppData {
     interface Key {
-        String keyItem = "keyItem";
-        String keyPrice = "keyPrice";
-        String keyFood = "keyFood";
+        String item = "keyItem";
+        String price = "keyPrice";
+        String food = "keyFood";
+        String foodId = "foodId";
+        String fartContents = "keyCartContents";
     }
 
     interface Config {

@@ -3,14 +3,17 @@ package com.example.celafoodapp.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.core.view.ViewCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.celafoodapp.R;
-import com.example.celafoodapp.database.entity.Cart;
-import com.example.celafoodapp.database.entity.Food;
+import com.example.celafoodapp.local.entity.Cart;
+import com.example.celafoodapp.local.entity.Food;
+import com.example.celafoodapp.local.entity.Order;
 import com.example.celafoodapp.databinding.ActivityDetailBinding;
 import com.example.celafoodapp.ui.base.BaseActivity;
 import com.example.celafoodapp.util.AppData;
@@ -22,12 +25,18 @@ public class DetailActivity extends BaseActivity {
 
     private ActivityDetailBinding binding;
     private FoodViewModel foodViewModel;
-    private int numberOfItems = 1;
+    //    private int numberOfItems = 1;
     private Food food;
 
     public static void starter(Context context, Food food) {
         Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra(AppData.Key.keyFood, food);
+        intent.putExtra(AppData.Key.food, food);
+        context.startActivity(intent);
+    }
+
+    public static void idStarter(Context context, int foodId) {
+        Intent intent = new Intent(context, DetailActivity.class);
+        intent.putExtra(AppData.Key.foodId, foodId);
         context.startActivity(intent);
     }
 
@@ -41,7 +50,7 @@ public class DetailActivity extends BaseActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            food = (Food) intent.getSerializableExtra(AppData.Key.keyFood);
+            food = (Food) intent.getSerializableExtra(AppData.Key.food);
             if (food != null) {
                 Glide.with(getApplicationContext())
                         .load(food.getImage())
@@ -49,27 +58,49 @@ public class DetailActivity extends BaseActivity {
                 binding.foodPrice.setText(food.getPrice());
                 binding.collapsingToolbar.setTitle(food.getFoodName());
 
-                String temp = food.getDescriptionVN().substring(12);
-                binding.thanhPhanContent.setText(temp);
-                binding.ingredientContent.setText(food.getDescriptionEN());
+                if (food.getDescriptionEN() != null && food.getDescriptionVN() != null) {
+                    String temp = food.getDescriptionVN().substring(12);
+                    binding.thanhPhanContent.setText(temp);
+                    binding.ingredientContent.setText(food.getDescriptionEN());
+                } else {
+                    binding.thanhPhanContent.setText("");
+                    binding.ingredientContent.setText("");
+                }
                 binding.totalPrice.setText(food.getPrice());
+                binding.countText.setText(String.valueOf(food.getAmount()));
+                foodViewModel.setTotalItems(food.getAmount());
             }
+
+            int foodId = intent.getIntExtra(AppData.Key.foodId, 0);
         }
 
+        int cartId = food.getCartId();
+        Log.d("tag", cartId + "");
+
         binding.minusText.setOnClickListener(view -> {
-            if (numberOfItems > 1) {
-                numberOfItems--;
-                binding.countText.setText(String.valueOf(numberOfItems));
-                binding.totalPrice.setText(pricing(numberOfItems) + "đ");
-            } else {
-                return;
-            }
+//            if (foodViewModel.getTotalItems() > 1) {
+//                foodViewModel.setTotalItems();
+//                binding.countText.setText(String.valueOf(numberOfItems));
+//                binding.totalPrice.setText(pricing(numberOfItems) + "đ");
+//            } else {
+//                return;
+//            }
+            foodViewModel.minusItems();
+            binding.countText.setText(String.valueOf(foodViewModel.getTotalItems()));
+            foodViewModel.setTotalPrice(pricing(foodViewModel.getTotalItems()));
+            // binding.totalPrice.setText(pricing(foodViewModel.getTotalPrice()) + "đ");
+            binding.totalPrice.setText(foodViewModel.getTotalPrice() + "đ");
         });
 
         binding.plusText.setOnClickListener(view -> {
-            numberOfItems++;
-            binding.countText.setText(String.valueOf(numberOfItems));
-            binding.totalPrice.setText(pricing(numberOfItems) + "đ");
+//            numberOfItems++;
+//            binding.countText.setText(String.valueOf(numberOfItems));
+//            binding.totalPrice.setText(pricing(numberOfItems) + "đ");
+            foodViewModel.plusItems();
+            binding.countText.setText(String.valueOf(foodViewModel.getTotalItems()));
+            foodViewModel.setTotalPrice(pricing(foodViewModel.getTotalItems()));
+            // binding.totalPrice.setText(pricing(foodViewModel.getTotalItems()) + "đ");
+            binding.totalPrice.setText(foodViewModel.getTotalPrice() + "đ");
         });
 
         binding.addButton.setOnClickListener(view -> {
@@ -77,8 +108,20 @@ public class DetailActivity extends BaseActivity {
             int foodId = food.getId();
             int amount = Integer.parseInt(binding.countText.getText().toString());
             Cart cart = new Cart(userId, foodId, amount);
-            foodViewModel.insertCart(cart);
+            AsyncTask.execute(() -> foodViewModel.insertCart(cart));
+//            foodViewModel.insertCart(cart);
             Utility.toast(getApplicationContext(), "Add successfully");
+        });
+
+        binding.placeOrderButton.setOnClickListener(view -> {
+            int userId = 100;
+            int foodId = food.getId();
+            int amount = Integer.parseInt(binding.countText.getText().toString());
+            Order order = new Order(userId, foodId, amount);
+            AsyncTask.execute(() -> foodViewModel.insertOrder(order));
+//            foodViewModel.insertCart(cart);
+            //Utility.toast(getApplicationContext(), "Add successfully");
+            CheckoutActivity.starter(DetailActivity.this, foodViewModel.getTotalItems(), foodViewModel.getTotalPrice());
         });
     }
 
@@ -91,7 +134,11 @@ public class DetailActivity extends BaseActivity {
     private int pricing(int numberOfItems) {
         String temp = ((food.getPrice().substring(0, food.getPrice().length() - 1)));
         String[] temp1 = temp.split(",");
-        return Integer.parseInt(temp1[0].concat(temp1[1])) * numberOfItems;
+        if (numberOfItems > 1) {
+            return Integer.parseInt(temp1[0].concat(temp1[1])) * numberOfItems;
+        } else {
+            return Integer.parseInt(temp1[0].concat(temp1[1])) * 1;
+        }
     }
 
     private void initToolbar() {

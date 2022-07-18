@@ -1,10 +1,10 @@
-package com.example.celafoodapp.database.dao;
+package com.example.celafoodapp.local.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.example.celafoodapp.database.entity.Food;
+import com.example.celafoodapp.local.entity.Food;
 
 import java.util.List;
 

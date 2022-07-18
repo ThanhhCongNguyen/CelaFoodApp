@@ -30,4 +30,5 @@
     <string name="help_text">Help</string>
     <string name="logout_text">Logout</string>
     <string name="search_text">Search</string>
+    <string name="payment_successfully_text">Payment Successfully</string>
 </resources>

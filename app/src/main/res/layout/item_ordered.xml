@@ -34,19 +34,9 @@
             android:text="Food Name"
             android:textAlignment="textStart"
             android:textSize="@dimen/largeText"
-            app:layout_constraintEnd_toStartOf="@id/cart"
+            app:layout_constraintEnd_toEndOf="@id/parent"
             app:layout_constraintStart_toEndOf="@id/imageView"
             app:layout_constraintTop_toTopOf="@id/imageView" />
-
-        <ImageView
-            android:id="@+id/cart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/extraSpace"
-            android:src="@drawable/ic_cart"
-            app:layout_constraintBottom_toBottomOf="@id/foodName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/foodName" />
 
         <TextView
             android:id="@+id/ingredient"
@@ -63,41 +53,37 @@
             app:layout_constraintTop_toBottomOf="@id/foodName" />
 
         <TextView
-            android:id="@+id/minus"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="@dimen/mediumSpace"
-            android:background="@drawable/circle_background_minus"
-            android:gravity="center"
-            android:text="-"
-            android:textColor="@drawable/select_textview"
-            app:layout_constraintStart_toStartOf="@id/ingredient"
-            app:layout_constraintTop_toBottomOf="@id/ingredient" />
+            android:id="@+id/completeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/extraSpace"
+            android:text="Complete"
+            android:textColor="@color/green"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/ingredient" />
 
         <TextView
             android:id="@+id/amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/extraSpace"
-            android:gravity="center"
-            android:text="1"
-            android:textSize="@dimen/largeText"
-            app:layout_constraintBottom_toBottomOf="@id/minus"
-            app:layout_constraintStart_toEndOf="@id/minus"
-            app:layout_constraintTop_toTopOf="@id/minus" />
+            android:layout_marginEnd="@dimen/smallSpace"
+            android:text="4"
+            android:textColor="@color/orange"
+            app:layout_constraintBottom_toBottomOf="@id/completeText"
+            app:layout_constraintEnd_toStartOf="@id/tv11"
+            app:layout_constraintTop_toTopOf="@id/completeText" />
 
         <TextView
-            android:id="@+id/plus"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="@dimen/extraSpace"
-            android:background="@drawable/circle_background_plus"
-            android:gravity="center"
-            android:text="+"
-            android:textColor="@drawable/select_textview"
-            app:layout_constraintBottom_toBottomOf="@id/minus"
-            app:layout_constraintStart_toEndOf="@id/amount"
-            app:layout_constraintTop_toTopOf="@id/minus" />
+            android:id="@+id/tv11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/smallSpace"
+            android:text="x"
+            android:textColor="@color/orange"
+            app:layout_constraintBottom_toBottomOf="@id/completeText"
+            app:layout_constraintEnd_toStartOf="@id/price"
+            app:layout_constraintTop_toTopOf="@id/completeText" />
 
         <TextView
             android:id="@+id/price"
@@ -107,8 +93,8 @@
             android:text="$120"
             android:textColor="@color/orange"
             android:textSize="@dimen/largeText"
-            app:layout_constraintBottom_toBottomOf="@id/minus"
+            app:layout_constraintBottom_toBottomOf="@id/completeText"
             app:layout_constraintEnd_toEndOf="@id/parent"
-            app:layout_constraintTop_toTopOf="@id/minus" />
+            app:layout_constraintTop_toTopOf="@id/completeText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,19 +1,23 @@
-package com.example.celafoodapp.database.entity;
+package com.example.celafoodapp.local.entity;
 
 public class CartContent {
     private int id;
     private int userId;
+    private int foodId;
     private String foodName;
     private String descriptionEN;
+    private String descriptionVN;
     private String price;
     private String image;
     private int amount;
 
-    public CartContent(int id, int userId, String foodName, String descriptionEN, String price, String image, int amount) {
+    public CartContent(int id, int userId, int foodId, String foodName, String descriptionEN, String descriptionVN, String price, String image, int amount) {
         this.id = id;
         this.userId = userId;
+        this.foodId = foodId;
         this.foodName = foodName;
         this.descriptionEN = descriptionEN;
+        this.descriptionVN = descriptionVN;
         this.price = price;
         this.image = image;
         this.amount = amount;
@@ -73,6 +77,30 @@ public class CartContent {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public int getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
+    }
+
+    public String getDescriptionEN() {
+        return descriptionEN;
+    }
+
+    public void setDescriptionEN(String descriptionEN) {
+        this.descriptionEN = descriptionEN;
+    }
+
+    public String getDescriptionVN() {
+        return descriptionVN;
+    }
+
+    public void setDescriptionVN(String descriptionVN) {
+        this.descriptionVN = descriptionVN;
     }
 
     @Override

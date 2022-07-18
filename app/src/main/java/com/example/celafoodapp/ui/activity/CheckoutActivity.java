@@ -13,8 +13,8 @@ public class CheckoutActivity extends BaseActivity {
 
     public static void starter(Context context, int totalItems, int totalPrice) {
         Intent intent = new Intent(context, CheckoutActivity.class);
-        intent.putExtra(AppData.Key.keyItem, totalItems);
-        intent.putExtra(AppData.Key.keyPrice, totalPrice);
+        intent.putExtra(AppData.Key.item, totalItems);
+        intent.putExtra(AppData.Key.price, totalPrice);
         context.startActivity(intent);
     }
 
@@ -30,11 +30,20 @@ public class CheckoutActivity extends BaseActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            int totalItems = intent.getIntExtra(AppData.Key.keyItem, 0);
-            int totalPrice = intent.getIntExtra(AppData.Key.keyPrice, 0);
+            int totalItems = intent.getIntExtra(AppData.Key.item, 0);
+            int totalPrice = intent.getIntExtra(AppData.Key.price, 0);
             binding.price.setText(String.valueOf(totalItems));
             binding.totalPrice.setText(totalPrice + "đ");
         }
+
+        binding.cancelButton.setOnClickListener(view -> {
+            finish();
+        });
+
+        binding.payButton.setOnClickListener(view -> {
+
+            startActivity(new Intent(CheckoutActivity.this, PaymentActivity.class));
+        });
     }
 
     @Override

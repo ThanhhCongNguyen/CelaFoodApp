@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.celafoodapp.database.entity.Food;
+import com.example.celafoodapp.local.entity.Food;
 import com.example.celafoodapp.databinding.FragmentHomeBinding;
 import com.example.celafoodapp.ui.activity.DetailActivity;
 import com.example.celafoodapp.ui.adapter.CategoryAdapter;
