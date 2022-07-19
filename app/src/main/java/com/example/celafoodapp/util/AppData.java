@@ -7,6 +7,10 @@ public interface AppData {
         String food = "keyFood";
         String foodId = "foodId";
         String fartContents = "keyCartContents";
+        String mySharedPreferences = "mySharedPreferences";
+        String isRemember = "isRemember";
+        String email = "email";
+        String password = "password";
     }
 
     interface Config {

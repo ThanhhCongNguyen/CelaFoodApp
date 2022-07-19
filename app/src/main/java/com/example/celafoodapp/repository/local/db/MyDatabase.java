@@ -1,4 +1,4 @@
-package com.example.celafoodapp.local.db;
+package com.example.celafoodapp.repository.local.db;
 
 import android.content.Context;
 
@@ -6,15 +6,15 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.celafoodapp.local.dao.CartDao;
-import com.example.celafoodapp.local.dao.OrderDao;
-import com.example.celafoodapp.local.dao.UserDao;
-import com.example.celafoodapp.local.entity.Cart;
-import com.example.celafoodapp.local.entity.Category;
-import com.example.celafoodapp.local.entity.Food;
-import com.example.celafoodapp.local.dao.FoodDao;
-import com.example.celafoodapp.local.entity.Order;
-import com.example.celafoodapp.local.entity.User;
+import com.example.celafoodapp.repository.local.dao.CartDao;
+import com.example.celafoodapp.repository.local.dao.OrderDao;
+import com.example.celafoodapp.repository.local.dao.UserDao;
+import com.example.celafoodapp.repository.local.entity.Cart;
+import com.example.celafoodapp.repository.local.entity.Category;
+import com.example.celafoodapp.repository.local.entity.Food;
+import com.example.celafoodapp.repository.local.dao.FoodDao;
+import com.example.celafoodapp.repository.local.entity.Order;
+import com.example.celafoodapp.repository.local.entity.User;
 
 @Database(entities = {Category.class,
                           Food.class,

@@ -1,5 +1,6 @@
-package com.example.celafoodapp.local.entity;
+package com.example.celafoodapp.repository.local.entity;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,6 +10,7 @@ public class Cart {
     private int id;
     private int userId;
     private int foodId;
+    @ColumnInfo(defaultValue = "amount")
     private int amount;
 
     public Cart(int userId, int foodId, int amount) {

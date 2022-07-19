@@ -50,7 +50,7 @@
         android:layout_marginEnd="@dimen/extraSpace"
         android:layout_marginBottom="@dimen/extraSpace"
         android:text="$1000"
-        android:textColor="@color/orange"
+        android:textColor="@color/green"
         android:textSize="@dimen/largeText"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/placeOrderedButton"

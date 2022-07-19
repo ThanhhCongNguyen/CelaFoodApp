@@ -7,17 +7,21 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.celafoodapp.local.entity.Food;
 import com.example.celafoodapp.databinding.FragmentHomeBinding;
+import com.example.celafoodapp.repository.local.entity.Food;
 import com.example.celafoodapp.ui.activity.DetailActivity;
 import com.example.celafoodapp.ui.adapter.CategoryAdapter;
 import com.example.celafoodapp.ui.adapter.FoodAdapter;
 import com.example.celafoodapp.ui.base.BaseFragment;
 import com.example.celafoodapp.util.AppData;
+import com.example.celafoodapp.util.Utility;
 import com.example.celafoodapp.viewmodel.FoodViewModel;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends BaseFragment {
     private FragmentHomeBinding binding;
@@ -55,9 +59,24 @@ public class HomeFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         displayRecyclerFood();
         observeRecyclerFood(AppData.Config.CATEGORY_DEFAULT);
+        getAllFood();
 
         displayRecyclerTitle();
         observeRecyclerTitle();
+
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return false;
+            }
+        });
+
     }
 
     private void displayRecyclerFood() {
@@ -67,7 +86,9 @@ public class HomeFragment extends BaseFragment {
 
     private void observeRecyclerFood(String category) {
         foodViewModel.getFood(category).observe(getViewLifecycleOwner(), foods -> {
-            foodAdapter.setFoods(foods);
+            if (foods != null) {
+                foodAdapter.setFoods(foods);
+            }
         });
     }
 
@@ -78,7 +99,32 @@ public class HomeFragment extends BaseFragment {
 
     private void observeRecyclerTitle() {
         foodViewModel.getCategoryTitle().observe(getViewLifecycleOwner(), titles -> {
-            categoryAdapter.setTitles(titles);
+            if (titles != null) {
+                categoryAdapter.setTitles(titles);
+            }
         });
     }
+
+    private void getAllFood() {
+        foodViewModel.getAllFood().observe(getViewLifecycleOwner(), foods -> {
+            if (foods != null) {
+                foodViewModel.setFoods(foods);
+            }
+        });
+    }
+
+    private void filter(String text) {
+        ArrayList<Food> foods = new ArrayList<>();
+        for (Food food : foodViewModel.getFoods()) {
+            if (food.getFoodName().toLowerCase().contains(text.toLowerCase())) {
+                foods.add(food);
+            }
+        }
+        if (foods.isEmpty()) {
+            Utility.toast(getContext(), "No data found...");
+        } else {
+            foodAdapter.setFoods(foods);
+        }
+    }
+
 }

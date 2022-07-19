@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/extraSpace"
                 android:text="$100"
-                android:textColor="@color/orange"
+                android:textColor="@color/green"
                 android:textSize="@dimen/extraExtraLargeText"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@id/tv10"

@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/smallSpace"
             android:text="4"
-            android:textColor="@color/orange"
+            android:textColor="@color/green"
             app:layout_constraintBottom_toBottomOf="@id/completeText"
             app:layout_constraintEnd_toStartOf="@id/tv11"
             app:layout_constraintTop_toTopOf="@id/completeText" />
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/smallSpace"
             android:text="x"
-            android:textColor="@color/orange"
+            android:textColor="@color/green"
             app:layout_constraintBottom_toBottomOf="@id/completeText"
             app:layout_constraintEnd_toStartOf="@id/price"
             app:layout_constraintTop_toTopOf="@id/completeText" />
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/extraSpace"
             android:text="$120"
-            android:textColor="@color/orange"
+            android:textColor="@color/green"
             android:textSize="@dimen/largeText"
             app:layout_constraintBottom_toBottomOf="@id/completeText"
             app:layout_constraintEnd_toEndOf="@id/parent"

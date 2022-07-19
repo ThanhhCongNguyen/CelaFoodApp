@@ -1,8 +1,6 @@
-package com.example.celafoodapp.local.entity;
+package com.example.celafoodapp.repository.local.entity;
 
-import java.io.Serializable;
-
-public class OrderContent implements Serializable {
+public class CartContent {
     private int id;
     private int userId;
     private int foodId;
@@ -13,7 +11,7 @@ public class OrderContent implements Serializable {
     private String image;
     private int amount;
 
-    public OrderContent(int id, int userId, int foodId, String foodName, String descriptionEN, String descriptionVN, String price, String image, int amount) {
+    public CartContent(int id, int userId, int foodId, String foodName, String descriptionEN, String descriptionVN, String price, String image, int amount) {
         this.id = id;
         this.userId = userId;
         this.foodId = foodId;
@@ -103,5 +101,18 @@ public class OrderContent implements Serializable {
 
     public void setDescriptionVN(String descriptionVN) {
         this.descriptionVN = descriptionVN;
+    }
+
+    @Override
+    public String toString() {
+        return "CartContent{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", foodName='" + foodName + '\'' +
+                ", ingredient='" + descriptionEN + '\'' +
+                ", price='" + price + '\'' +
+                ", image='" + image + '\'' +
+                ", amount=" + amount +
+                '}';
     }
 }

@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.celafoodapp.local.entity.Food;
 import com.example.celafoodapp.databinding.ItemFoodBinding;
+import com.example.celafoodapp.repository.local.entity.Food;
 
 import java.util.ArrayList;
 import java.util.List;

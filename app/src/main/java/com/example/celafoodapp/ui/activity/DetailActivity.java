@@ -11,10 +11,10 @@ import androidx.core.view.ViewCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.celafoodapp.R;
-import com.example.celafoodapp.local.entity.Cart;
-import com.example.celafoodapp.local.entity.Food;
-import com.example.celafoodapp.local.entity.Order;
 import com.example.celafoodapp.databinding.ActivityDetailBinding;
+import com.example.celafoodapp.repository.local.entity.Cart;
+import com.example.celafoodapp.repository.local.entity.Food;
+import com.example.celafoodapp.repository.local.entity.Order;
 import com.example.celafoodapp.ui.base.BaseActivity;
 import com.example.celafoodapp.util.AppData;
 import com.example.celafoodapp.util.Utility;
@@ -22,21 +22,13 @@ import com.example.celafoodapp.viewmodel.FoodViewModel;
 import com.google.android.material.appbar.AppBarLayout;
 
 public class DetailActivity extends BaseActivity {
-
     private ActivityDetailBinding binding;
     private FoodViewModel foodViewModel;
-    //    private int numberOfItems = 1;
     private Food food;
 
     public static void starter(Context context, Food food) {
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(AppData.Key.food, food);
-        context.startActivity(intent);
-    }
-
-    public static void idStarter(Context context, int foodId) {
-        Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra(AppData.Key.foodId, foodId);
         context.startActivity(intent);
     }
 
@@ -70,47 +62,40 @@ public class DetailActivity extends BaseActivity {
                 binding.countText.setText(String.valueOf(food.getAmount()));
                 foodViewModel.setTotalItems(food.getAmount());
             }
-
-            int foodId = intent.getIntExtra(AppData.Key.foodId, 0);
         }
-
         int cartId = food.getCartId();
         Log.d("tag", cartId + "");
 
         binding.minusText.setOnClickListener(view -> {
-//            if (foodViewModel.getTotalItems() > 1) {
-//                foodViewModel.setTotalItems();
-//                binding.countText.setText(String.valueOf(numberOfItems));
-//                binding.totalPrice.setText(pricing(numberOfItems) + "đ");
-//            } else {
-//                return;
-//            }
             foodViewModel.minusItems();
             binding.countText.setText(String.valueOf(foodViewModel.getTotalItems()));
             foodViewModel.setTotalPrice(pricing(foodViewModel.getTotalItems()));
-            // binding.totalPrice.setText(pricing(foodViewModel.getTotalPrice()) + "đ");
             binding.totalPrice.setText(foodViewModel.getTotalPrice() + "đ");
         });
 
         binding.plusText.setOnClickListener(view -> {
-//            numberOfItems++;
-//            binding.countText.setText(String.valueOf(numberOfItems));
-//            binding.totalPrice.setText(pricing(numberOfItems) + "đ");
             foodViewModel.plusItems();
             binding.countText.setText(String.valueOf(foodViewModel.getTotalItems()));
             foodViewModel.setTotalPrice(pricing(foodViewModel.getTotalItems()));
-            // binding.totalPrice.setText(pricing(foodViewModel.getTotalItems()) + "đ");
             binding.totalPrice.setText(foodViewModel.getTotalPrice() + "đ");
         });
 
         binding.addButton.setOnClickListener(view -> {
+            //   int cartId = food.getCartId();
             int userId = 100;
             int foodId = food.getId();
             int amount = Integer.parseInt(binding.countText.getText().toString());
             Cart cart = new Cart(userId, foodId, amount);
-            AsyncTask.execute(() -> foodViewModel.insertCart(cart));
-//            foodViewModel.insertCart(cart);
-            Utility.toast(getApplicationContext(), "Add successfully");
+            Log.d("tag", "amount: " + amount);
+            if (cartId == 0) {
+                AsyncTask.execute(() -> foodViewModel.insertCart(cart));
+                Utility.toast(getApplicationContext(), "Add successfully");
+            } else {
+                Log.d("tag", "amountCart: " + cart.getAmount());
+                AsyncTask.execute(() -> foodViewModel.updateCart(0,4));
+                finish();
+                Utility.toast(getApplicationContext(), "Update successfully");
+            }
         });
 
         binding.placeOrderButton.setOnClickListener(view -> {

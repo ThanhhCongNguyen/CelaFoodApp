@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/extraSpace"
             android:text="$120"
-            android:textColor="@color/orange"
+            android:textColor="@color/green"
             android:textSize="@dimen/largeText"
             app:layout_constraintBottom_toBottomOf="@id/minus"
             app:layout_constraintEnd_toEndOf="@id/parent"

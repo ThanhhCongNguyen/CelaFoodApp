@@ -2,6 +2,7 @@ package com.example.celafoodapp.ui.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.celafoodapp.local.entity.CartContent;
-import com.example.celafoodapp.local.entity.Food;
-import com.example.celafoodapp.local.entity.Order;
 import com.example.celafoodapp.databinding.FragmentCartBinding;
+import com.example.celafoodapp.repository.local.entity.CartContent;
+import com.example.celafoodapp.repository.local.entity.Food;
+import com.example.celafoodapp.repository.local.entity.Order;
 import com.example.celafoodapp.ui.activity.CheckoutActivity;
 import com.example.celafoodapp.ui.activity.DetailActivity;
 import com.example.celafoodapp.ui.adapter.CartAdapter;
@@ -28,8 +29,6 @@ public class CartFragment extends BaseFragment {
     private FragmentCartBinding binding;
     private FoodViewModel foodViewModel;
     private CartAdapter cartAdapter;
-//    private List<CartContent> cartContents;
-//    private List<Order> orderContents;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,8 +55,6 @@ public class CartFragment extends BaseFragment {
                 DetailActivity.starter(getContext(), food);
             }
         });
-//        cartContents = new ArrayList<>();
-//        orderContents = new ArrayList<>();
     }
 
     @Override
@@ -80,7 +77,6 @@ public class CartFragment extends BaseFragment {
                 int amount = cartContent.getAmount();
                 Order order = new Order(userId, foodId, amount);
                 foodViewModel.addOrder(order);
-//                foodViewModel.setOrderContents();
             }
             AsyncTask.execute(() -> foodViewModel.insertMultipleRows(foodViewModel.getOrderContents()));
             // CheckoutActivity.starter(getContext(), foodViewModel.getTotalItems(), foodViewModel.getTotalPrice());
@@ -96,9 +92,12 @@ public class CartFragment extends BaseFragment {
 
     private void observeCartRecyclerView() {
         foodViewModel.getAllCart().observe(getViewLifecycleOwner(), cartContents -> {
-            cartAdapter.setCarts(cartContents);
-            setTotal(cartContents);
-            foodViewModel.setCartContents(cartContents);
+            if (cartContents != null) {
+                cartAdapter.setCarts(cartContents);
+                setTotal(cartContents);
+                Log.d("tag", "update");
+                foodViewModel.setCartContents(cartContents);
+            }
         });
     }
 
@@ -116,23 +115,18 @@ public class CartFragment extends BaseFragment {
     }
 
     private void plusAction(int id, int amount) {
-        amount++;
-        int finalAmount = amount;
+        int amount1 = amount++;
+//       // int finalAmount = amount;
+        int finalAmount = amount1;
         AsyncTask.execute(() -> foodViewModel.updateCart(id, finalAmount));
-        // foodViewModel.updateCart(id, amount);
+        Log.d("tag", "+");
     }
 
     private void minusAction(int id, int amount) {
-        if (amount > 1) {
-            amount--;
-            int finalAmount = amount;
-            AsyncTask.execute(() -> foodViewModel.updateCart(id, finalAmount));
-        }
+//        if (amount > 1) {
+//            amount--;
+//            //int finalAmount = amount;
+//            AsyncTask.execute(() -> foodViewModel.updateCart(id, finalAmount));
+//        }
     }
-
-//    private int pricing(CartContent cart) {
-//        String temp = ((cart.getPrice().substring(0, cart.getPrice().length() - 1)));
-//        String[] temp1 = temp.split(",");
-//        return Integer.parseInt(temp1[0].concat(temp1[1])) * cart.getAmount();
-//    }
 }

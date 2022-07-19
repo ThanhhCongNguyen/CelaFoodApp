@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.celafoodapp.local.entity.CartContent;
-import com.example.celafoodapp.local.entity.Food;
+import com.example.celafoodapp.repository.local.entity.CartContent;
+import com.example.celafoodapp.repository.local.entity.Food;
 import com.example.celafoodapp.databinding.ItemCartBinding;
 import com.example.celafoodapp.util.Utility;
 
@@ -104,12 +104,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         void itemOnClick(Food food);
     }
-
-//    private int pricing(CartContent cart) {
-//        String temp = ((cart.getPrice().substring(0, cart.getPrice().length() - 1)));
-//        String[] temp1 = temp.split(",");
-//        return Integer.parseInt(temp1[0].concat(temp1[1])) * cart.getAmount();
-//    }
 
     public void deleteItem(int position) {
         //  int recentDeletedItem = carts.get(position);

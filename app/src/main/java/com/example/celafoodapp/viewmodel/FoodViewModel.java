@@ -5,11 +5,11 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.celafoodapp.local.entity.Cart;
-import com.example.celafoodapp.local.entity.CartContent;
-import com.example.celafoodapp.local.entity.Food;
-import com.example.celafoodapp.local.entity.Order;
-import com.example.celafoodapp.local.entity.OrderContent;
+import com.example.celafoodapp.repository.local.entity.Cart;
+import com.example.celafoodapp.repository.local.entity.CartContent;
+import com.example.celafoodapp.repository.local.entity.Food;
+import com.example.celafoodapp.repository.local.entity.Order;
+import com.example.celafoodapp.repository.local.entity.OrderContent;
 import com.example.celafoodapp.repository.FoodRepository;
 
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ public class FoodViewModel extends ViewModel {
     private int totalPrice = 0;
     private List<CartContent> cartContents;
     private List<Order> orderContents;
+    private List<Food> foods;
 
     public FoodViewModel(Context context) {
         foodRepository = new FoodRepository(context);
@@ -31,6 +32,10 @@ public class FoodViewModel extends ViewModel {
 
     public LiveData<List<Food>> getFood(String categoryTitle) {
         return foodRepository.getFood(categoryTitle);
+    }
+
+    public LiveData<List<Food>> getAllFood() {
+        return foodRepository.getAllFood();
     }
 
     public LiveData<List<String>> getCategoryTitle() {
@@ -47,6 +52,10 @@ public class FoodViewModel extends ViewModel {
 
     public void insertCart(Cart cart) {
         foodRepository.insertCart(cart);
+    }
+
+    public void update(Cart cart) {
+        foodRepository.update(cart);
     }
 
     public void deleteCart(Cart cart) {
@@ -71,6 +80,14 @@ public class FoodViewModel extends ViewModel {
 
     public void setTotalItems(int totalItems) {
         this.totalItems = totalItems;
+    }
+
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
     }
 
     public void plusItems() {

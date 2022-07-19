@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.celafoodapp.local.entity.CartContent;
+import com.example.celafoodapp.repository.local.entity.CartContent;
 import com.google.android.material.snackbar.Snackbar;
 
 public class Utility {

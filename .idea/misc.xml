@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/drawable/add_background.xml" value="0.1615" />
+        <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/drawable/background_bottom_right_left.xml" value="0.1705" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/drawable/background_button_add_to_cart.xml" value="0.164" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/drawable/background_button_login.xml" value="0.1515" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/drawable/background_icon.xml" value="0.164" />
@@ -36,6 +37,7 @@
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_payment.xml" value="0.22592592592592592" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_sign_in.xml" value="0.16" />
+        <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_sign_up.xml" value="0.22592592592592592" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_signup.xml" value="0.20863616930312098" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/fragment_cart.xml" value="0.22592592592592592" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/fragment_home.xml" value="0.22592592592592592" />

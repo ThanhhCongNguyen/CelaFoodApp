@@ -1,19 +1,21 @@
 package com.example.celafoodapp.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.celafoodapp.local.dao.CartDao;
-import com.example.celafoodapp.local.dao.FoodDao;
-import com.example.celafoodapp.local.dao.OrderDao;
-import com.example.celafoodapp.local.dao.UserDao;
-import com.example.celafoodapp.local.db.MyDatabase;
-import com.example.celafoodapp.local.entity.Cart;
-import com.example.celafoodapp.local.entity.CartContent;
-import com.example.celafoodapp.local.entity.Food;
-import com.example.celafoodapp.local.entity.Order;
-import com.example.celafoodapp.local.entity.OrderContent;
+import com.example.celafoodapp.repository.local.dao.CartDao;
+import com.example.celafoodapp.repository.local.dao.FoodDao;
+import com.example.celafoodapp.repository.local.dao.OrderDao;
+import com.example.celafoodapp.repository.local.dao.UserDao;
+import com.example.celafoodapp.repository.local.db.MyDatabase;
+import com.example.celafoodapp.repository.local.entity.Cart;
+import com.example.celafoodapp.repository.local.entity.CartContent;
+import com.example.celafoodapp.repository.local.entity.Food;
+import com.example.celafoodapp.repository.local.entity.Order;
+import com.example.celafoodapp.repository.local.entity.OrderContent;
+import com.example.celafoodapp.repository.local.entity.User;
 
 import java.util.List;
 
@@ -35,6 +37,10 @@ public class FoodRepository {
         return foodDao.getFood(categoryTitle);
     }
 
+    public LiveData<List<Food>> getAllFood() {
+        return foodDao.getAllFood();
+    }
+
     public LiveData<List<String>> getCategoryTitle() {
         return foodDao.getCategoryTitle();
     }
@@ -47,8 +53,18 @@ public class FoodRepository {
         return cartDao.getAllCart();
     }
 
+    public LiveData<User> getUser(String email, String password) {
+        return userDao.getUser(email, password);
+    }
+
     public void insertCart(Cart cart) {
         cartDao.insert(cart);
+        Log.d("tag", "insert");
+    }
+
+    public void update(Cart cart) {
+        cartDao.updateCart(cart);
+        Log.d("tag", "update");
     }
 
     public void insertOrder(Order order) {
@@ -59,8 +75,13 @@ public class FoodRepository {
         orderDao.insertMultipleRows(orders);
     }
 
+    public void insertUser(User user) {
+        userDao.insertUser(user);
+    }
+
     public void deleteCart(Cart cart) {
         cartDao.delete(cart);
+        Log.d("tag", "delete");
     }
 
     public void updateCart(int id, int amount) {

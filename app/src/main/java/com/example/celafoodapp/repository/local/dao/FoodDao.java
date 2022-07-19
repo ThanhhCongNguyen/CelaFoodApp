@@ -1,10 +1,10 @@
-package com.example.celafoodapp.local.dao;
+package com.example.celafoodapp.repository.local.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.example.celafoodapp.local.entity.Food;
+import com.example.celafoodapp.repository.local.entity.Food;
 
 import java.util.List;
 
@@ -15,4 +15,7 @@ public interface FoodDao {
 
     @Query("SELECT DISTINCT categoryTitle from food")
     LiveData<List<String>> getCategoryTitle();
+
+    @Query("SELECT * FROM food")
+    LiveData<List<Food>> getAllFood();
 }

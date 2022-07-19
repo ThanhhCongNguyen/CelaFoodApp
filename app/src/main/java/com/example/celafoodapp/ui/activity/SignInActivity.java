@@ -1,59 +1,58 @@
 package com.example.celafoodapp.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.example.celafoodapp.R;
-import com.example.celafoodapp.local.entity.User;
 import com.example.celafoodapp.databinding.ActivitySignInBinding;
 import com.example.celafoodapp.ui.base.BaseActivity;
 import com.example.celafoodapp.util.Utility;
-import com.example.celafoodapp.viewmodel.LoginViewModel;
+import com.example.celafoodapp.viewmodel.SignInViewModel;
 
 import java.util.Objects;
 
 public class SignInActivity extends BaseActivity {
     private ActivitySignInBinding binding;
-    private LoginViewModel loginViewModel;
+    private SignInViewModel signInViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        binding = DataBindingUtil.setContentView(SignInActivity.this, R.layout.activity_sign_in);
-        binding.setLifecycleOwner(this);
-        binding.setLoginViewModel(loginViewModel);
+
+        SignInViewModel.initSharePreferences(getApplicationContext());
+        signInViewModel = new SignInViewModel(getApplicationContext());
+        signInViewModel.getData(SignInActivity.this);
 
         binding.signInButton.setOnClickListener(view -> {
             String email = binding.mailEdittext.getText().toString().trim();
             String password = binding.passwordEdittext.getText().toString().trim();
-            User user = new User(email, password);
-            loginViewModel.onClick(view, user);
-        });
+            boolean isEmailEmpty = TextUtils.isEmpty(Objects.requireNonNull(email));
+            boolean isPasswordEmpty = TextUtils.isEmpty(Objects.requireNonNull(password));
 
-        loginViewModel.getUser().observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                if (TextUtils.isEmpty(Objects.requireNonNull(user).getEmail())) {
-                    binding.mailEdittext.setError("Enter an E-Mail Address");
-                    binding.mailEdittext.requestFocus();
-                } else if (!user.isEmailValid()) {
-                    binding.mailEdittext.setError("Enter a valid email address");
-                    binding.mailEdittext.requestFocus();
-                } else if (!user.isPasswordLengthGreaterThan6()) {
-                    binding.passwordEdittext.setError("Enter at least 6 digit password");
-                    binding.passwordEdittext.requestFocus();
-                } else {
-                    Utility.toast(getApplicationContext(), "Login successfully");
-                }
+            if (isEmailEmpty) {
+                binding.mailEdittext.setError("Enter an E-Mail Address");
+                binding.mailEdittext.requestFocus();
+            } else if (isPasswordEmpty) {
+                binding.passwordEdittext.setError("Enter a password");
+                binding.passwordEdittext.requestFocus();
+            }
+            if (!isEmailEmpty && !isPasswordEmpty) {
+                signInViewModel.getUser(email, password).observe(SignInActivity.this, user -> {
+                    if (user != null) {
+                        startActivity(new Intent(this, MainActivity.class));
+                        signInViewModel.setUpSharePreferences(true);
+                        Utility.toast(getApplicationContext(), "Login successfully");
+                    } else {
+                        Utility.toast(getApplicationContext(), "Email or Password is incorrect");
+                    }
+                });
             }
         });
 
+        binding.signUpText.setOnClickListener(view -> {
+            startActivity(new Intent(this, SignUpActivity.class));
+        });
     }
 }

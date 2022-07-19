@@ -1,4 +1,4 @@
-package com.example.celafoodapp.local.entity;
+package com.example.celafoodapp.repository.local.entity;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -125,5 +125,20 @@ public class Food implements Serializable {
 
     public void setCartId(int cartId) {
         this.cartId = cartId;
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "id=" + id +
+                ", foodName='" + foodName + '\'' +
+                ", price='" + price + '\'' +
+                ", image='" + image + '\'' +
+                ", descriptionVN='" + descriptionVN + '\'' +
+                ", descriptionEN='" + descriptionEN + '\'' +
+                ", categoryTitle='" + categoryTitle + '\'' +
+                ", amount=" + amount +
+                ", cartId=" + cartId +
+                '}';
     }
 }

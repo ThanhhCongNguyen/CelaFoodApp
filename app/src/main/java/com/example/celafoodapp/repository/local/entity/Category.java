@@ -1,4 +1,4 @@
-package com.example.celafoodapp.local.entity;
+package com.example.celafoodapp.repository.local.entity;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

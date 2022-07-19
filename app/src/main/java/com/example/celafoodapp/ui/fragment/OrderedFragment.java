@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.celafoodapp.local.entity.Food;
+import com.example.celafoodapp.repository.local.entity.Food;
 import com.example.celafoodapp.databinding.FragmentOrderedBinding;
 import com.example.celafoodapp.ui.activity.DetailActivity;
 import com.example.celafoodapp.ui.adapter.OrderAdapter;
@@ -56,7 +56,9 @@ public class OrderedFragment extends BaseFragment {
 
     private void observeOrder() {
         foodViewModel.getAllOrder().observe(getViewLifecycleOwner(), orderContents -> {
-            orderAdapter.setOrderContents(orderContents);
+            if (orderContents != null) {
+                orderAdapter.setOrderContents(orderContents);
+            }
         });
     }
 

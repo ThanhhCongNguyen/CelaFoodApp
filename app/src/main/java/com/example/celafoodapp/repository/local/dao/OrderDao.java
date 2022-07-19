@@ -1,4 +1,4 @@
-package com.example.celafoodapp.local.dao;
+package com.example.celafoodapp.repository.local.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -6,8 +6,8 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.celafoodapp.local.entity.Order;
-import com.example.celafoodapp.local.entity.OrderContent;
+import com.example.celafoodapp.repository.local.entity.Order;
+import com.example.celafoodapp.repository.local.entity.OrderContent;
 
 import java.util.List;
 

@@ -9,7 +9,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@color/orange"
+        android:background="@color/green"
         android:fitsSystemWindows="false">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:collapsedTitleTextColor="@color/white"
-            app:contentScrim="@color/orange"
+            app:contentScrim="@color/green"
             app:expandedTitleTextColor="@color/white"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:title="">
@@ -111,7 +111,7 @@
                 android:layout_marginStart="@dimen/extraSpace"
                 android:layout_marginTop="@dimen/extraSpace"
                 android:text="$ 100"
-                android:textColor="@color/orange"
+                android:textColor="@color/green"
                 android:textSize="@dimen/largeText"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/subConstrain"
@@ -305,7 +305,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/extraSpace"
                 android:text="$2030"
-                android:textColor="@color/orange"
+                android:textColor="@color/green"
                 android:textSize="@dimen/largeText"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/tv10"

@@ -1,4 +1,4 @@
-package com.example.celafoodapp.local.entity;
+package com.example.celafoodapp.repository.local.entity;
 
 import android.util.Patterns;
 
@@ -15,8 +15,7 @@ public class User {
     private String password;
 
 
-    public User(int id, String email, String name, String password) {
-        this.id = id;
+    public User(String email, String name, String password) {
         this.email = email;
         this.name = name;
         this.password = password;
