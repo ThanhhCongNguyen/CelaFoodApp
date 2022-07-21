@@ -155,6 +155,7 @@
                 android:id="@+id/passwordEdittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,11 +164,12 @@
             android:id="@+id/signUpButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/extraLargeSpace"
+            android:layout_marginTop="@dimen/largeSpace"
             android:background="@drawable/background_button_login"
             android:text="@string/sign_up_text"
             app:backgroundTint="@null"
             app:layout_constraintEnd_toEndOf="@+id/passwordInput"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/passwordInput"
             app:layout_constraintTop_toBottomOf="@id/passwordInput" />
 

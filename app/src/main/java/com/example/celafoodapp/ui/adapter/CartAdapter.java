@@ -47,6 +47,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             String descriptionVN = cartContent.getDescriptionVN();
             String descriptionEN = cartContent.getDescriptionEN();
             int amount = cartContent.getAmount();
+
             Food food = new Food(cartId, foodId, foodName, price, image, descriptionVN, descriptionEN, amount);
             Order order = new Order(userId, foodId, amount);
 

@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/extraSpace"
         android:layout_marginTop="@dimen/extraSpace"
-        android:text="Hi Thanh"
+        android:text="Cela Food"
         android:textColor="@color/green"
         android:textSize="@dimen/largeText"
         android:textStyle="bold"

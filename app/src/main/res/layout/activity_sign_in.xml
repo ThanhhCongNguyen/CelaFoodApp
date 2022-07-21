@@ -141,36 +141,36 @@
             android:id="@+id/reminderSwitch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/extraLargeSpace"
+            android:layout_marginBottom="@dimen/extraSpace"
             android:text="@string/reminder_me_next_time_text"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/signInButton"
             app:layout_constraintEnd_toEndOf="@+id/passwordInput"
-            app:layout_constraintStart_toStartOf="@+id/passwordInput"
-            app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
+            app:layout_constraintStart_toStartOf="@+id/passwordInput" />
 
         <Button
             android:id="@+id/signInButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/extraSpace"
+            android:layout_marginBottom="@dimen/extraSpace"
             android:background="@drawable/background_button_login"
             android:text="@string/sign_in_text"
             app:backgroundTint="@null"
+            app:layout_constraintBottom_toTopOf="@+id/signUpText"
             app:layout_constraintEnd_toEndOf="@+id/reminderSwitch"
-            app:layout_constraintStart_toStartOf="@+id/reminderSwitch"
-            app:layout_constraintTop_toBottomOf="@id/reminderSwitch" />
+            app:layout_constraintStart_toStartOf="@+id/reminderSwitch" />
 
         <TextView
             android:id="@+id/signUpText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/extraSpace"
+            android:layout_marginBottom="@dimen/extraLargeSpace"
             android:gravity="center"
             android:text="@string/don_t_have_account_sign_up_text"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/signInButton"
-            app:layout_constraintStart_toStartOf="@id/signInButton"
-            app:layout_constraintTop_toBottomOf="@id/signInButton" />
+            app:layout_constraintStart_toStartOf="@id/signInButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
