@@ -134,5 +134,4 @@ public class HomeFragment extends BaseFragment {
             foodAdapter.setFoods(foods);
         }
     }
-
 }

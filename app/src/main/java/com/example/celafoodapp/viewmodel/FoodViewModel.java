@@ -30,7 +30,6 @@ public class FoodViewModel extends ViewModel {
         foodRepository = new FoodRepository(context);
         cartContents = new ArrayList<>();
         orderContents = new ArrayList<>();
-
     }
 
     public LiveData<List<Food>> getFood(String categoryTitle) {
