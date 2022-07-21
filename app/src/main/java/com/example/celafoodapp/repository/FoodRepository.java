@@ -81,6 +81,10 @@ public class FoodRepository {
         userDao.insertUser(user);
     }
 
+    public void updatePassword(String userId, String password) {
+        userDao.updatePassword(userId, password);
+    }
+
     public void deleteCart(Cart cart) {
         cartDao.delete(cart);
     }

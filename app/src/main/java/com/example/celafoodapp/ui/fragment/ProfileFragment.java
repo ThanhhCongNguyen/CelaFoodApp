@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.example.celafoodapp.databinding.FragmentProfileBinding;
 import com.example.celafoodapp.ui.activity.SignInActivity;
+import com.example.celafoodapp.ui.activity.UpdatePasswordActivity;
 import com.example.celafoodapp.ui.base.BaseFragment;
 import com.example.celafoodapp.util.AppData;
 import com.example.celafoodapp.util.SetUpSharePreferences;
@@ -48,6 +49,10 @@ public class ProfileFragment extends BaseFragment {
         foodViewModel.getUserById(foodViewModel.getUserId()).observe(getViewLifecycleOwner(), user -> {
             binding.name.setText(user.getName());
             binding.gmail.setText(user.getEmail());
+        });
+
+        binding.changePassword.setOnClickListener(view1 -> {
+            UpdatePasswordActivity.starter(getContext(), foodViewModel.getUserId());
         });
 
         binding.logout.setOnClickListener(view1 -> {

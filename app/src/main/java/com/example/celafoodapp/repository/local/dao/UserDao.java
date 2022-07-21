@@ -17,4 +17,7 @@ public interface UserDao {
 
     @Insert
     void insertUser(User user);
+
+    @Query("UPDATE user SET password = :password WHERE id = :userId")
+    void updatePassword(String userId, String password);
 }
