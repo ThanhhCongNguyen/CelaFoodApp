@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_main"
-    tools:context=".ui.activity.SignUpActivity">
+    android:background="@drawable/background_main">
 
     <ImageView
         android:id="@+id/backIcon"
@@ -102,6 +100,7 @@
             android:layout_marginTop="@dimen/extraLargeSpace"
             android:layout_marginEnd="@dimen/extraSpace"
             android:hint="@string/gmail_text"
+            app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="@id/subConstrain"
             app:layout_constraintStart_toStartOf="@id/subConstrain"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
@@ -110,7 +109,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mailEdittext"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -123,6 +123,7 @@
             android:layout_marginTop="@dimen/extraSpace"
             android:layout_marginEnd="@dimen/extraSpace"
             android:hint="@string/password_text"
+            app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="@id/subConstrain"
             app:layout_constraintStart_toStartOf="@id/subConstrain"
             app:layout_constraintTop_toBottomOf="@+id/mailInput"
@@ -131,7 +132,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordEdittext"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Switch

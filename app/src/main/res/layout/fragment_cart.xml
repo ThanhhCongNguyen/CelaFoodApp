@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.CartFragment">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/myCartTextView"
@@ -17,6 +15,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/extraLargeText"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,47 +25,20 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/extraSpace"
         android:layout_marginBottom="@dimen/extraSpace"
-        app:layout_constraintBottom_toTopOf="@+id/subTotalTextView"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myCartTextView" />
 
-    <TextView
-        android:id="@+id/subTotalTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/extraSpace"
-        android:text="Sub Total(5 items) "
-        android:textColor="@color/black"
-        android:textSize="@dimen/largeText"
-        app:layout_constraintBottom_toBottomOf="@+id/totalPrice"
-        app:layout_constraintEnd_toStartOf="@+id/totalPrice"
-        app:layout_constraintTop_toTopOf="@+id/totalPrice" />
-
-    <TextView
-        android:id="@+id/totalPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/extraSpace"
-        android:layout_marginBottom="@dimen/extraSpace"
-        android:text="$1000"
-        android:textColor="@color/green"
-        android:textSize="@dimen/largeText"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/placeOrderedButton"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/placeOrderedButton"
+    <include
+        android:id="@+id/layoutEmpty"
+        layout="@layout/layout_empty"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/extraSpace"
-        android:layout_marginEnd="@dimen/extraSpace"
-        android:layout_marginBottom="@dimen/extraSpace"
-        android:background="@drawable/add_background"
-        android:text="Place Ordered"
-        app:backgroundTint="@null"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

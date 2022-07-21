@@ -3,18 +3,20 @@
     <string name="need_some_help_text">Need some help?</string>
     <string name="getting_started_text">Getting started</string>
     <string name="create_an_account_to_continue_text">Create an account to continue!</string>
+
     <string name="gmail_text">Gmail</string>
     <string name="name_text">Name</string>
     <string name="password_text">Password</string>
     <string name="reminder_me_next_time_text">Reminder me next time</string>
     <string name="sign_up_text">Sign Up</string>
+
     <string name="already_have_an_account_sign_in_text">Already have an account? Sign In</string>
     <string name="forgot_your_password_text">Forgot your password</string>
     <string name="let_s_get_something_text">Let\'s get something</string>
     <string name="good_to_see_you_back_text">Good to see you back</string>
     <string name="sign_in_text">Sign In</string>
     <string name="don_t_have_account_sign_up_text">Don\'t have account? Sign Up</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="thanh_phan_text">Thành phần:</string>
     <string name="ingredients_text">Ingredients:</string>

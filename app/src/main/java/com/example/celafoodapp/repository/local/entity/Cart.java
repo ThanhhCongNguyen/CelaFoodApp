@@ -1,37 +1,38 @@
 package com.example.celafoodapp.repository.local.entity;
 
-import androidx.room.ColumnInfo;
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "cart")
 public class Cart {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    private int userId;
+    @NonNull
+    @PrimaryKey()
+    private String id;
+    private String userId;
     private int foodId;
-    @ColumnInfo(defaultValue = "amount")
     private int amount;
 
-    public Cart(int userId, int foodId, int amount) {
+    public Cart(String id, String userId, int foodId, int amount) {
+        this.id = id;
         this.userId = userId;
         this.foodId = foodId;
         this.amount = amount;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

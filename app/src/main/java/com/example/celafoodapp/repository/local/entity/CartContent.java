@@ -1,8 +1,8 @@
 package com.example.celafoodapp.repository.local.entity;
 
 public class CartContent {
-    private int id;
-    private int userId;
+    private String id;
+    private String userId;
     private int foodId;
     private String foodName;
     private String descriptionEN;
@@ -11,7 +11,7 @@ public class CartContent {
     private String image;
     private int amount;
 
-    public CartContent(int id, int userId, int foodId, String foodName, String descriptionEN, String descriptionVN, String price, String image, int amount) {
+    public CartContent(String id, String userId, int foodId, String foodName, String descriptionEN, String descriptionVN, String price, String image, int amount) {
         this.id = id;
         this.userId = userId;
         this.foodId = foodId;
@@ -23,19 +23,19 @@ public class CartContent {
         this.amount = amount;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

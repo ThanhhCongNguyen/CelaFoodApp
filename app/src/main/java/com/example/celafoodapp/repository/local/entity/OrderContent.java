@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class OrderContent implements Serializable {
     private int id;
-    private int userId;
+    private String userId;
     private int foodId;
     private String foodName;
     private String descriptionEN;
@@ -13,7 +13,7 @@ public class OrderContent implements Serializable {
     private String image;
     private int amount;
 
-    public OrderContent(int id, int userId, int foodId, String foodName, String descriptionEN, String descriptionVN, String price, String image, int amount) {
+    public OrderContent(int id, String userId, int foodId, String foodName, String descriptionEN, String descriptionVN, String price, String image, int amount) {
         this.id = id;
         this.userId = userId;
         this.foodId = foodId;
@@ -33,11 +33,11 @@ public class OrderContent implements Serializable {
         this.id = id;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

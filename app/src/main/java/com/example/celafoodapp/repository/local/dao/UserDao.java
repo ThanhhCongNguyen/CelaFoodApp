@@ -12,6 +12,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE user.email = :email AND user.password = :password")
     LiveData<User> getUser(String email, String password);
 
+    @Query("SELECT * FROM user WHERE id = :userId")
+    LiveData<User> getUserById(String userId);
+
     @Insert
     void insertUser(User user);
 }

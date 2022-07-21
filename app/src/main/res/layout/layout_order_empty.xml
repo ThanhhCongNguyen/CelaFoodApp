@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pink">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/extraLargeSpace"
+        android:src="@drawable/shop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/extraSpace"
+        android:layout_marginTop="@dimen/extraLargeSpace"
+        android:layout_marginEnd="@dimen/extraSpace"
+        android:layout_marginBottom="@dimen/extraSpace"
+        android:elevation="@dimen/smallRadius"
+        app:cardCornerRadius="@dimen/smallRadius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/subConstrain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/extraLargeSpace"
+                android:gravity="center"
+                android:text="Your order is empty"
+                android:textSize="@dimen/extraLargeText"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/subConstrain"
+                app:layout_constraintStart_toStartOf="@id/subConstrain"
+                app:layout_constraintTop_toTopOf="@id/subConstrain" />
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:text="Looks like you haven't made your order yet"
+                android:textSize="@dimen/largeText"
+                app:layout_constraintEnd_toEndOf="@id/tv1"
+                app:layout_constraintStart_toStartOf="@id/tv1"
+                app:layout_constraintTop_toBottomOf="@id/tv1" />
+
+            <Button
+                android:id="@+id/shopButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:layout_marginEnd="@dimen/extraSpace"
+                android:background="@drawable/background_button_login"
+                android:text="Shop now"
+                app:backgroundTint="@null"
+                app:layout_constraintEnd_toEndOf="@id/subConstrain"
+                app:layout_constraintStart_toStartOf="@id/subConstrain"
+                app:layout_constraintTop_toBottomOf="@id/tv2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

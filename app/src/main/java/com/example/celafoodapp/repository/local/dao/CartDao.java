@@ -15,16 +15,18 @@ import java.util.List;
 
 @Dao
 public interface CartDao {
-    @Query("SELECT * FROM cart, food WHERE cart.foodId = food.id")
-    LiveData<List<CartContent>> getAllCart();
-
-    @Query("UPDATE cart SET amount = :amount WHERE id = :id")
-    void update(int id, int amount);
+    @Query("SELECT cart.id, cart.userId, cart.foodId, foodName, descriptionEN, descriptionVN, price, image, amount " +
+            "FROM cart, food " +
+            "WHERE cart.foodId = food.id AND cart.userId = :userId")
+    LiveData<List<CartContent>> getAllCart(String userId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Cart cart);
 
-    @Update (entity = Cart.class)
+    @Query("UPDATE cart SET amount = :amount WHERE id = :id AND cart.userId = :userId")
+    void update(String id, int amount, String userId);
+
+    @Update
     void updateCart(Cart cart);
 
     @Delete

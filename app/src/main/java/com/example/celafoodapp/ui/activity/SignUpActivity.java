@@ -1,21 +1,26 @@
 package com.example.celafoodapp.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 
 import com.example.celafoodapp.databinding.ActivitySignUpBinding;
 import com.example.celafoodapp.repository.local.entity.User;
 import com.example.celafoodapp.ui.base.BaseActivity;
-import com.example.celafoodapp.util.Utility;
+import com.example.celafoodapp.util.AppData;
+import com.example.celafoodapp.util.SetUpSharePreferences;
 import com.example.celafoodapp.viewmodel.SignUpViewModel;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class SignUpActivity extends BaseActivity {
     private ActivitySignUpBinding binding;
     private SignUpViewModel signUpViewModel;
+    private ProgressDialog dialog;
+    private SetUpSharePreferences setUpSharePreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +28,18 @@ public class SignUpActivity extends BaseActivity {
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         signUpViewModel = new SignUpViewModel(getApplicationContext());
+        setUpSharePreferences = new SetUpSharePreferences();
+
+        SetUpSharePreferences.initSharePreferences(getApplicationContext());
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("We're creating an new account...");
 
         binding.signUpButton.setOnClickListener(view -> {
+            String userId = UUID.randomUUID().toString();
             String email = binding.mailEdittext.getText().toString().trim();
             String name = binding.nameEdittext.getText().toString().trim();
             String password = binding.passwordEdittext.getText().toString().trim();
-            User user = new User(email, name, password);
+            User user = new User(userId, email, name, password);
 
             if (TextUtils.isEmpty(Objects.requireNonNull(user).getEmail())) {
                 binding.mailEdittext.setError("Enter an E-Mail Address");
@@ -43,13 +54,28 @@ public class SignUpActivity extends BaseActivity {
                 binding.passwordEdittext.setError("Enter at least 6 digit password");
                 binding.passwordEdittext.requestFocus();
             } else {
-                AsyncTask.execute(() -> signUpViewModel.insertUser(user));
-                Utility.toast(getApplicationContext(), "Sign Up  successfully");
+                dialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        executor.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                setUpSharePreferences.setUpSharePreferences(true, userId);
+                                signUpViewModel.insertUser(user);
+                            }
+                        });
+                        dialog.dismiss();
+                        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                        finish();
+                    }
+                }, AppData.Config.DELAY_MILLIS);
             }
         });
 
         binding.signInText.setOnClickListener(view -> {
             startActivity(new Intent(this, SignInActivity.class));
+            finish();
         });
     }
 }

@@ -19,7 +19,7 @@ public class Food implements Serializable {
     @Ignore
     private int amount;
     @Ignore
-    private int cartId;
+    private String cartId;
 
     public Food(int id, String foodName, String price, String image, String descriptionVN, String descriptionEN, String categoryTitle) {
         this.id = id;
@@ -44,7 +44,7 @@ public class Food implements Serializable {
     }
 
     @Ignore
-    public Food(int cartId, int foodId, String foodName, String price, String image, String descriptionVN, String descriptionEN, int amount) {
+    public Food(String cartId, int foodId, String foodName, String price, String image, String descriptionVN, String descriptionEN, int amount) {
         this.cartId = cartId;
         this.id = foodId;
         this.foodName = foodName;
@@ -119,11 +119,11 @@ public class Food implements Serializable {
         this.amount = amount;
     }
 
-    public int getCartId() {
+    public String getCartId() {
         return cartId;
     }
 
-    public void setCartId(int cartId) {
+    public void setCartId(String cartId) {
         this.cartId = cartId;
     }
 

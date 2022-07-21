@@ -18,7 +18,6 @@ import com.example.celafoodapp.ui.adapter.CategoryAdapter;
 import com.example.celafoodapp.ui.adapter.FoodAdapter;
 import com.example.celafoodapp.ui.base.BaseFragment;
 import com.example.celafoodapp.util.AppData;
-import com.example.celafoodapp.util.Utility;
 import com.example.celafoodapp.viewmodel.FoodViewModel;
 
 import java.util.ArrayList;
@@ -33,10 +32,19 @@ public class HomeFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         foodViewModel = new FoodViewModel(getContext());
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String userId = bundle.getString(AppData.Key.userId);
+            if (userId != null) {
+                foodViewModel.setUserId(userId);
+            }
+        }
+
         foodAdapter = new FoodAdapter(new FoodAdapter.CallBack() {
             @Override
             public void onItemClick(Food food) {
-                DetailActivity.starter(getContext(), food);
+                DetailActivity.starter(getContext(), food, foodViewModel.getUserId());
             }
         });
         categoryAdapter = new CategoryAdapter(new CategoryAdapter.CallBack() {
@@ -121,7 +129,7 @@ public class HomeFragment extends BaseFragment {
             }
         }
         if (foods.isEmpty()) {
-            Utility.toast(getContext(), "No data found...");
+
         } else {
             foodAdapter.setFoods(foods);
         }

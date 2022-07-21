@@ -1,202 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/background_bottom_right_left"
         android:orientation="vertical"
-        tools:context=".ui.fragment.ProfileFragment">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/profile"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_bottom_right_left"
-            android:orientation="vertical">
+            android:layout_marginStart="@dimen/extraSpace"
+            android:layout_marginTop="@dimen/extraSpace"
+            android:text="Profile"
+            android:textSize="@dimen/extraLargeText"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/view"
+            app:layout_constraintTop_toTopOf="@id/view" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/extraSpace"
-                android:text="@string/profile_text"
-                android:textSize="@dimen/extraExtraLargeText"
-                android:textStyle="bold" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/extraSpace"
+        android:layout_marginTop="-160dp"
+        android:layout_marginEnd="@dimen/extraSpace"
+        android:layout_marginBottom="@dimen/extraSpace"
+        android:elevation="@dimen/extraRadius"
+        app:cardCornerRadius="@dimen/extraRadius"
+        app:layout_constraintBottom_toTopOf="@id/logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/subConstrain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_gravity="center"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="@dimen/extraSpace"
                 android:layout_marginTop="@dimen/extraSpace"
-                android:src="@drawable/profile" />
+                android:src="@drawable/profile"
+                app:layout_constraintStart_toStartOf="@id/subConstrain"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/extraSpace"
                 android:layout_marginTop="@dimen/extraSpace"
                 android:text="Name"
                 android:textSize="@dimen/largeText"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView" />
 
             <TextView
                 android:id="@+id/gmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/mediumSpace"
+                android:text="Gmail"
+                app:layout_constraintStart_toStartOf="@id/name"
+                app:layout_constraintTop_toBottomOf="@id/name" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/mediumSpace"
                 android:layout_marginTop="@dimen/extraSpace"
-                android:layout_marginBottom="@dimen/extraSpace"
-                android:text="gmail"
-                android:textSize="@dimen/largeText" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                android:layout_marginEnd="@dimen/mediumSpace"
+                android:background="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView" />
 
             <TextView
                 android:id="@+id/changePassword"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/extraSpace"
                 android:layout_marginTop="@dimen/extraSpace"
                 android:layout_marginEnd="@dimen/extraSpace"
-                android:background="@drawable/background_items_profile"
                 android:drawableStart="@drawable/ic_lock"
                 android:drawableEnd="@drawable/ic_next"
-                android:drawablePadding="@dimen/smallSpace"
-                android:gravity="center_vertical"
-                android:padding="@dimen/mediumSpace"
-                android:text="@string/change_password_text" />
-
-            <TextView
-                android:id="@+id/payment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/extraSpace"
-                android:layout_marginTop="@dimen/extraSpace"
-                android:layout_marginEnd="@dimen/extraSpace"
-                android:background="@drawable/background_items_profile"
-                android:drawableStart="@drawable/ic_payments"
-                android:drawableEnd="@drawable/ic_next"
-                android:drawablePadding="@dimen/smallSpace"
-                android:gravity="center_vertical"
-                android:padding="@dimen/mediumSpace"
-                android:text="@string/payment_text" />
+                android:drawablePadding="@dimen/extraSpace"
+                android:padding="@dimen/medium1Space"
+                android:text="Change Password"
+                android:textSize="@dimen/largeText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line" />
 
             <TextView
                 android:id="@+id/orderHistory"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/extraSpace"
                 android:layout_marginTop="@dimen/extraSpace"
                 android:layout_marginEnd="@dimen/extraSpace"
-                android:background="@drawable/background_items_profile"
                 android:drawableStart="@drawable/ic_history"
                 android:drawableEnd="@drawable/ic_next"
-                android:drawablePadding="@dimen/smallSpace"
-                android:gravity="center_vertical"
-                android:padding="@dimen/mediumSpace"
-                android:text="@string/order_history_text" />
-
-            <TextView
-                android:id="@+id/favoriteCart"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/extraSpace"
-                android:layout_marginTop="@dimen/extraSpace"
-                android:layout_marginEnd="@dimen/extraSpace"
-                android:background="@drawable/background_items_profile"
-                android:drawableStart="@drawable/ic_favorite"
-                android:drawableEnd="@drawable/ic_next"
-                android:drawablePadding="@dimen/smallSpace"
-                android:gravity="center_vertical"
-                android:padding="@dimen/mediumSpace"
-                android:text="@string/favorite_cart_text" />
-
-            <TextView
-                android:id="@+id/deliveryAddress"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/extraSpace"
-                android:layout_marginTop="@dimen/extraSpace"
-                android:layout_marginEnd="@dimen/extraSpace"
-                android:background="@drawable/background_items_profile"
-                android:drawableStart="@drawable/ic_location"
-                android:drawableEnd="@drawable/ic_next"
-                android:drawablePadding="@dimen/smallSpace"
-                android:gravity="center_vertical"
-                android:padding="@dimen/mediumSpace"
-                android:text="@string/delivery_address_text" />
-
-            <TextView
-                android:id="@+id/storeLocation"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/extraSpace"
-                android:layout_marginTop="@dimen/extraSpace"
-                android:layout_marginEnd="@dimen/extraSpace"
-                android:background="@drawable/background_items_profile"
-                android:drawableStart="@drawable/ic_store"
-                android:drawableEnd="@drawable/ic_next"
-                android:drawablePadding="@dimen/smallSpace"
-                android:gravity="center_vertical"
-                android:padding="@dimen/mediumSpace"
-                android:text="@string/store_location_text" />
-
-            <TextView
-                android:id="@+id/termsAndConditions"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/extraSpace"
-                android:layout_marginTop="@dimen/extraSpace"
-                android:layout_marginEnd="@dimen/extraSpace"
-                android:background="@drawable/background_items_profile"
-                android:drawableStart="@drawable/ic_note"
-                android:drawableEnd="@drawable/ic_next"
-                android:drawablePadding="@dimen/smallSpace"
-                android:gravity="center_vertical"
-                android:padding="@dimen/mediumSpace"
-                android:text="@string/terms_and_conditions_text" />
+                android:drawablePadding="@dimen/extraSpace"
+                android:padding="@dimen/medium1Space"
+                android:text="Order History"
+                android:textSize="@dimen/largeText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/changePassword" />
 
             <TextView
                 android:id="@+id/help"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/extraSpace"
                 android:layout_marginTop="@dimen/extraSpace"
                 android:layout_marginEnd="@dimen/extraSpace"
-                android:background="@drawable/background_items_profile"
                 android:drawableStart="@drawable/ic_help"
                 android:drawableEnd="@drawable/ic_next"
-                android:drawablePadding="@dimen/smallSpace"
-                android:gravity="center_vertical"
-                android:padding="@dimen/mediumSpace"
-                android:text="@string/help_text" />
+                android:drawablePadding="@dimen/extraSpace"
+                android:padding="@dimen/medium1Space"
+                android:text="Help"
+                android:textSize="@dimen/largeText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/storeLocation" />
 
             <TextView
-                android:id="@+id/logout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:id="@+id/storeLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/extraSpace"
                 android:layout_marginTop="@dimen/extraSpace"
                 android:layout_marginEnd="@dimen/extraSpace"
-                android:layout_marginBottom="@dimen/extraSpace"
-                android:background="@drawable/background_items_profile"
-                android:drawableStart="@drawable/ic_logout"
+                android:drawableStart="@drawable/ic_store"
                 android:drawableEnd="@drawable/ic_next"
-                android:drawablePadding="@dimen/smallSpace"
-                android:gravity="center_vertical"
-                android:padding="@dimen/mediumSpace"
-                android:text="@string/logout_text" />
-        </LinearLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+                android:drawablePadding="@dimen/extraSpace"
+                android:padding="@dimen/medium1Space"
+                android:text="Store Location"
+                android:textSize="@dimen/largeText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/orderHistory" />
+
+            <TextView
+                android:id="@+id/termsAndCondition"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/extraSpace"
+                android:layout_marginTop="@dimen/extraSpace"
+                android:layout_marginEnd="@dimen/extraSpace"
+                android:drawableStart="@drawable/ic_note"
+                android:drawableEnd="@drawable/ic_next"
+                android:drawablePadding="@dimen/extraSpace"
+                android:padding="@dimen/medium1Space"
+                android:text="Terms And Condition"
+                android:textSize="@dimen/largeText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/help" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/extraSpace"
+        android:layout_marginEnd="@dimen/extraSpace"
+        android:layout_marginBottom="@dimen/extraSpace"
+        android:background="@drawable/background_button_login"
+        android:text="Logout"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

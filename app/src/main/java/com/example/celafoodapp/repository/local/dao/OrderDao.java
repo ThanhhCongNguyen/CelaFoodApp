@@ -13,8 +13,8 @@ import java.util.List;
 
 @Dao
 public interface OrderDao {
-    @Query("SELECT * FROM `order`, food WHERE `order`.foodId = food.id")
-    LiveData<List<OrderContent>> getAllOrder();
+    @Query("SELECT * FROM `order`, food WHERE `order`.foodId = food.id AND `order`.userId = :userId")
+    LiveData<List<OrderContent>> getAllOrder(String userId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Order order);

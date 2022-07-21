@@ -3,15 +3,17 @@ package com.example.celafoodapp.repository.local.entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "order")
-public class Order {
+public class Order implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private int userId;
+    private String userId;
     private int foodId;
     private int amount;
 
-    public Order(int userId, int foodId, int amount) {
+    public Order(String userId, int foodId, int amount) {
         this.userId = userId;
         this.foodId = foodId;
         this.amount = amount;
@@ -25,11 +27,11 @@ public class Order {
         this.id = id;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

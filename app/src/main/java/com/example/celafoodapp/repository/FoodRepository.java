@@ -1,7 +1,6 @@
 package com.example.celafoodapp.repository;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -45,26 +44,29 @@ public class FoodRepository {
         return foodDao.getCategoryTitle();
     }
 
-    public LiveData<List<OrderContent>> getAllOrder() {
-        return orderDao.getAllOrder();
+    public LiveData<List<OrderContent>> getAllOrder(String userId) {
+        return orderDao.getAllOrder(userId);
     }
 
-    public LiveData<List<CartContent>> getCart() {
-        return cartDao.getAllCart();
+    public LiveData<List<CartContent>> getCart(String userId) {
+        return cartDao.getAllCart(userId);
     }
 
     public LiveData<User> getUser(String email, String password) {
         return userDao.getUser(email, password);
     }
 
+    public LiveData<User> getUserById(String userId) {
+        return userDao.getUserById(userId);
+    }
+
     public void insertCart(Cart cart) {
         cartDao.insert(cart);
-        Log.d("tag", "insert");
     }
 
     public void update(Cart cart) {
         cartDao.updateCart(cart);
-        Log.d("tag", "update");
+
     }
 
     public void insertOrder(Order order) {
@@ -81,10 +83,9 @@ public class FoodRepository {
 
     public void deleteCart(Cart cart) {
         cartDao.delete(cart);
-        Log.d("tag", "delete");
     }
 
-    public void updateCart(int id, int amount) {
-        cartDao.update(id, amount);
+    public void updateCart(String id, int amount, String userId) {
+        cartDao.update(id, amount, userId);
     }
 }

@@ -5,12 +5,13 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.celafoodapp.repository.FoodRepository;
 import com.example.celafoodapp.repository.local.entity.Cart;
 import com.example.celafoodapp.repository.local.entity.CartContent;
 import com.example.celafoodapp.repository.local.entity.Food;
 import com.example.celafoodapp.repository.local.entity.Order;
 import com.example.celafoodapp.repository.local.entity.OrderContent;
-import com.example.celafoodapp.repository.FoodRepository;
+import com.example.celafoodapp.repository.local.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,8 @@ public class FoodViewModel extends ViewModel {
     private List<CartContent> cartContents;
     private List<Order> orderContents;
     private List<Food> foods;
+    private String userId;
+    private Food food;
 
     public FoodViewModel(Context context) {
         foodRepository = new FoodRepository(context);
@@ -42,36 +45,36 @@ public class FoodViewModel extends ViewModel {
         return foodRepository.getCategoryTitle();
     }
 
-    public LiveData<List<CartContent>> getAllCart() {
-        return foodRepository.getCart();
+    public LiveData<List<CartContent>> getAllCart(String userId) {
+        return foodRepository.getCart(userId);
     }
 
-    public LiveData<List<OrderContent>> getAllOrder() {
-        return foodRepository.getAllOrder();
+    public LiveData<List<OrderContent>> getAllOrder(String userId) {
+        return foodRepository.getAllOrder(userId);
+    }
+
+    public LiveData<User> getUserById(String userId) {
+        return foodRepository.getUserById(userId);
     }
 
     public void insertCart(Cart cart) {
         foodRepository.insertCart(cart);
     }
 
-    public void update(Cart cart) {
-        foodRepository.update(cart);
+    public void updateCart(String id, int amount, String userId) {
+        foodRepository.updateCart(id, amount, userId);
     }
 
     public void deleteCart(Cart cart) {
         foodRepository.deleteCart(cart);
     }
 
-    public void updateCart(int id, int amount) {
-        foodRepository.updateCart(id, amount);
+    public Food getFood() {
+        return food;
     }
 
-    public void insertOrder(Order order) {
-        foodRepository.insertOrder(order);
-    }
-
-    public void insertMultipleRows(List<Order> orders) {
-        foodRepository.insertMultipleRows(orders);
+    public void setFood(Food food) {
+        this.food = food;
     }
 
     public int getTotalItems() {
@@ -110,23 +113,15 @@ public class FoodViewModel extends ViewModel {
         this.totalPrice = totalPrice;
     }
 
-    public List<CartContent> getCartContents() {
-        return cartContents;
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public void setCartContents(List<CartContent> cartContents) {
         this.cartContents = cartContents;
-    }
-
-    public List<Order> getOrderContents() {
-        return orderContents;
-    }
-
-    public void setOrderContents(List<Order> orderContents) {
-        this.orderContents = orderContents;
-    }
-
-    public void addOrder(Order order) {
-        orderContents.add(order);
     }
 }

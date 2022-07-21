@@ -36,9 +36,10 @@
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_payment.xml" value="0.22592592592592592" />
-        <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_sign_in.xml" value="0.16" />
+        <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_sign_in.xml" value="0.264" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_sign_up.xml" value="0.22592592592592592" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/activity_signup.xml" value="0.20863616930312098" />
+        <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/dialog_success.xml" value="0.22592592592592592" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/fragment_cart.xml" value="0.22592592592592592" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/fragment_home.xml" value="0.22592592592592592" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/fragment_ordered.xml" value="0.22592592592592592" />
@@ -47,6 +48,8 @@
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/item_category.xml" value="0.22592592592592592" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/item_food.xml" value="0.2" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/item_ordered.xml" value="0.22592592592592592" />
+        <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/layout_empty.xml" value="0.22592592592592592" />
+        <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/layout/layout_order_empty.xml" value="0.22592592592592592" />
         <entry key="..\:/AndroidIntern/CelaFoodApp/app/src/main/res/menu/bottom_menu.xml" value="0.20863616930312098" />
       </map>
     </option>

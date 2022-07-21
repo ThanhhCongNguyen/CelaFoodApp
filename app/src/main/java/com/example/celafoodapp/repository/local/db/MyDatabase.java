@@ -19,9 +19,9 @@ import com.example.celafoodapp.repository.local.entity.User;
 @Database(entities = {Category.class,
                           Food.class,
                           Cart.class,
-                         Order.class,
-                         User.class},
-                         version = 1)
+                          Order.class,
+                          User.class},
+                          version = 1)
 public abstract class MyDatabase extends RoomDatabase {
     public abstract FoodDao foodDao();
 

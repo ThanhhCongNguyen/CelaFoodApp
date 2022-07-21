@@ -2,20 +2,23 @@ package com.example.celafoodapp.repository.local.entity;
 
 import android.util.Patterns;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "user")
 public class User {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @NonNull
+    @PrimaryKey()
+    private String id;
     private String email;
     private String name;
     private String password;
 
 
-    public User(String email, String name, String password) {
+    public User(String id, String email, String name, String password) {
+        this.id = id;
         this.email = email;
         this.name = name;
         this.password = password;
@@ -27,11 +30,11 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

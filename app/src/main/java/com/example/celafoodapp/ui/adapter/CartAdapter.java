@@ -8,16 +8,17 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.celafoodapp.databinding.ItemCartBinding;
+import com.example.celafoodapp.repository.local.entity.Cart;
 import com.example.celafoodapp.repository.local.entity.CartContent;
 import com.example.celafoodapp.repository.local.entity.Food;
-import com.example.celafoodapp.databinding.ItemCartBinding;
+import com.example.celafoodapp.repository.local.entity.Order;
 import com.example.celafoodapp.util.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
-
     private List<CartContent> carts;
     private Callback callback;
 
@@ -35,17 +36,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        CartContent cart = carts.get(position);
-        if (cart != null) {
-            int cartId = cart.getId();
-            int foodId = cart.getFoodId();
-            String foodName = cart.getFoodName();
-            String price = cart.getPrice();
-            String image = cart.getImage();
-            String descriptionVN = cart.getDescriptionVN();
-            String descriptionEN = cart.getDescriptionEN();
-            int amount = cart.getAmount();
+        CartContent cartContent = carts.get(position);
+        if (cartContent != null) {
+            String userId = cartContent.getUserId();
+            String cartId = cartContent.getId();
+            int foodId = cartContent.getFoodId();
+            String foodName = cartContent.getFoodName();
+            String price = cartContent.getPrice();
+            String image = cartContent.getImage();
+            String descriptionVN = cartContent.getDescriptionVN();
+            String descriptionEN = cartContent.getDescriptionEN();
+            int amount = cartContent.getAmount();
             Food food = new Food(cartId, foodId, foodName, price, image, descriptionVN, descriptionEN, amount);
+            Order order = new Order(userId, foodId, amount);
 
             Glide.with(holder.itemView)
                     .load(image)
@@ -54,18 +57,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             holder.binding.foodName.setText(foodName);
             holder.binding.ingredient.setText("Ingredient: " + descriptionEN);
             holder.binding.amount.setText(String.valueOf(amount));
-            holder.binding.price.setText(String.valueOf(Utility.pricing(cart)));
+            holder.binding.price.setText(String.valueOf(Utility.pricing(cartContent)));
 
             holder.binding.minus.setOnClickListener(view -> {
-                callback.minus(cart.getId(), cart.getAmount());
+                callback.minus(cartContent.getId(), cartContent.getAmount());
             });
 
             holder.binding.plus.setOnClickListener(view -> {
-                callback.plus(cart.getId(), cart.getAmount());
+                callback.plus(cartContent.getId(), cartContent.getAmount());
             });
 
             holder.binding.cart.setOnClickListener(view -> {
-                callback.checkout(cart.getAmount(), Utility.pricing(cart));
+                callback.checkout(cartContent.getAmount(), Utility.pricing(cartContent), cartContent.getPrice(), order);
             });
 
             holder.itemView.setOnClickListener(view -> {
@@ -96,21 +99,21 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     public interface Callback {
-        void minus(int id, int amount);
+        void minus(String id, int amount);
 
-        void plus(int id, int amount);
+        void plus(String id, int amount);
 
-        void checkout(int amount, int price);
+        void checkout(int amount, int totalPrice, String price, Order order);
 
         void itemOnClick(Food food);
+
+        void deleteItem(Cart cart, int position);
     }
 
-    public void deleteItem(int position) {
-        //  int recentDeletedItem = carts.get(position);
-        int recentDeletedItemPosition = position;
+    public void deleteItem(Cart cart, int position) {
+        callback.deleteItem(cart, position);
         carts.remove(position);
         notifyItemRemoved(position);
-
     }
 
     public static class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
@@ -129,7 +132,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getAdapterPosition();
-            cartAdapter.deleteItem(position);
+            CartContent cartContent = cartAdapter.carts.get(position);
+            String cartId = cartContent.getId();
+            String userId = cartContent.getUserId();
+            int foodId = cartContent.getFoodId();
+            int amount = cartContent.getAmount();
+            Cart cart = new Cart(cartId, userId, foodId, amount);
+            cartAdapter.deleteItem(cart, position);
         }
     }
 }

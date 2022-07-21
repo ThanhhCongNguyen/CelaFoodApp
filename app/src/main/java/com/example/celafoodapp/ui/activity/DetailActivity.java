@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.core.view.ViewCompat;
 
@@ -21,14 +20,16 @@ import com.example.celafoodapp.util.Utility;
 import com.example.celafoodapp.viewmodel.FoodViewModel;
 import com.google.android.material.appbar.AppBarLayout;
 
+import java.util.UUID;
+
 public class DetailActivity extends BaseActivity {
     private ActivityDetailBinding binding;
     private FoodViewModel foodViewModel;
-    private Food food;
 
-    public static void starter(Context context, Food food) {
+    public static void starter(Context context, Food food, String userId) {
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(AppData.Key.food, food);
+        intent.putExtra(AppData.Key.userId, userId);
         context.startActivity(intent);
     }
 
@@ -42,7 +43,7 @@ public class DetailActivity extends BaseActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            food = (Food) intent.getSerializableExtra(AppData.Key.food);
+            Food food = (Food) intent.getSerializableExtra(AppData.Key.food);
             if (food != null) {
                 Glide.with(getApplicationContext())
                         .load(food.getImage())
@@ -61,10 +62,11 @@ public class DetailActivity extends BaseActivity {
                 binding.totalPrice.setText(food.getPrice());
                 binding.countText.setText(String.valueOf(food.getAmount()));
                 foodViewModel.setTotalItems(food.getAmount());
+
+                foodViewModel.setFood(food);
             }
+            foodViewModel.setUserId(intent.getStringExtra(AppData.Key.userId));
         }
-        int cartId = food.getCartId();
-        Log.d("tag", cartId + "");
 
         binding.minusText.setOnClickListener(view -> {
             foodViewModel.minusItems();
@@ -81,32 +83,29 @@ public class DetailActivity extends BaseActivity {
         });
 
         binding.addButton.setOnClickListener(view -> {
-            //   int cartId = food.getCartId();
-            int userId = 100;
-            int foodId = food.getId();
+            String cartId = foodViewModel.getFood().getCartId();
+            String userId = foodViewModel.getUserId();
+            int foodId = foodViewModel.getFood().getId();
             int amount = Integer.parseInt(binding.countText.getText().toString());
-            Cart cart = new Cart(userId, foodId, amount);
-            Log.d("tag", "amount: " + amount);
-            if (cartId == 0) {
-                AsyncTask.execute(() -> foodViewModel.insertCart(cart));
+
+            if (cartId == null) {
+                cartId = UUID.randomUUID().toString();
+                Cart cart = new Cart(cartId, userId, foodId, amount);
+                executor.execute(() -> foodViewModel.insertCart(cart));
                 Utility.toast(getApplicationContext(), "Add successfully");
             } else {
-                Log.d("tag", "amountCart: " + cart.getAmount());
-                AsyncTask.execute(() -> foodViewModel.updateCart(0,4));
+                AsyncTask.execute(() -> foodViewModel.updateCart(foodViewModel.getFood().getCartId(), amount, foodViewModel.getUserId()));
                 finish();
                 Utility.toast(getApplicationContext(), "Update successfully");
             }
         });
 
         binding.placeOrderButton.setOnClickListener(view -> {
-            int userId = 100;
-            int foodId = food.getId();
+            String userId = foodViewModel.getUserId();
+            int foodId = foodViewModel.getFood().getId();
             int amount = Integer.parseInt(binding.countText.getText().toString());
             Order order = new Order(userId, foodId, amount);
-            AsyncTask.execute(() -> foodViewModel.insertOrder(order));
-//            foodViewModel.insertCart(cart);
-            //Utility.toast(getApplicationContext(), "Add successfully");
-            CheckoutActivity.starter(DetailActivity.this, foodViewModel.getTotalItems(), foodViewModel.getTotalPrice());
+            CheckoutActivity.starter(DetailActivity.this, foodViewModel.getTotalItems(), foodViewModel.getTotalPrice(), foodViewModel.getFood().getPrice(), order);
         });
     }
 
@@ -117,7 +116,7 @@ public class DetailActivity extends BaseActivity {
     }
 
     private int pricing(int numberOfItems) {
-        String temp = ((food.getPrice().substring(0, food.getPrice().length() - 1)));
+        String temp = ((foodViewModel.getFood().getPrice().substring(0, foodViewModel.getFood().getPrice().length() - 1)));
         String[] temp1 = temp.split(",");
         if (numberOfItems > 1) {
             return Integer.parseInt(temp1[0].concat(temp1[1])) * numberOfItems;
