@@ -29,8 +29,8 @@ public class SignUpActivity extends BaseActivity {
         setContentView(binding.getRoot());
         signUpViewModel = new SignUpViewModel(getApplicationContext());
         setUpSharePreferences = new SetUpSharePreferences();
-
         SetUpSharePreferences.initSharePreferences(getApplicationContext());
+
         dialog = new ProgressDialog(this);
         dialog.setMessage("We're creating an new account...");
 
